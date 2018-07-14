@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "hook.name" . }}
+{{- if .Values.hook.service.annotations }}
+  annotations:
+{{ toYaml .Values.hook.service.annotations | indent 4 }}
+{{- end }}
+spec:
+  type: {{ .Values.hook.service.type }}
+  selector:
+    app: {{ template "hook.name" . }}
+  ports:
+  - port: {{ .Values.hook.service.externalPort }}
+    targetPort: {{ .Values.hook.service.internalPort }}
+    protocol: TCP
+    name: http

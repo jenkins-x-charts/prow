@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "horologium.name" . }}
+  labels:
+    app: {{ template "horologium.name" . }}
+spec:
+  replicas: {{ .Values.horologium.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "horologium.name" . }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.horologium.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "horologium.name" . }}
+        image: {{ .Values.horologium.image.repository }}:{{ .Values.horologium.image.tag }}
+        imagePullPolicy: {{ .Values.horologium.imagePullPolicy }}
+{{- if .Values.horologium.env }}
+        env:
+{{- range $pkey, $pval := .Values.horologium.env }}
+        - name: {{ $pkey }}
+          value: {{ $pval }}
+{{- end }}
+{{- end }}
+        resources:
+{{ toYaml .Values.horologium.resources | indent 10 }}
+        volumeMounts:
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: config

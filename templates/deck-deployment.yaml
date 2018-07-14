@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "deck.name" . }}
+  labels:
+    app: {{ template "deck.name" . }}
+spec:
+  replicas: {{ .Values.deck.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "deck.name" . }}
+    spec:
+      serviceAccountName: {{ template "deck.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.deck.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "deck.name" . }}
+        image: {{ .Values.deck.image.repository }}:{{ .Values.deck.image.tag }}
+        imagePullPolicy: {{ .Values.deck.imagePullPolicy }}
+{{ if .Values.deck.args }}
+        args:
+{{ toYaml .Values.deck.args | indent 10 }}
+{{- end }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.deck.service.internalPort }}
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deck.probe.path }}
+            port: http
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deck.probe.path }}
+            port: http
+{{- if .Values.deck.env }}
+        env:
+{{- range $pkey, $pval := .Values.deck.env }}
+        - name: {{ $pkey }}
+          value: {{ $pval }}
+{{- end }}
+{{- end }}
+        resources:
+{{ toYaml .Values.deck.resources | indent 10 }}
+        volumeMounts:
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: config
+    {{- with .Values.deck.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.deck.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.deck.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

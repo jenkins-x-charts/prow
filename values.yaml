@@ -1,0 +1,107 @@
+# Default values for prow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deck:
+  replicaCount: 2
+  probe:
+    path: /
+  image:
+    repository: gcr.io/k8s-prow/deck
+    tag: v20180709-7109caeb1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+  args:
+    - --hook-url=http://hook:8888/plugin-help
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+  service:
+    type: ClusterIP
+    externalPort: 80
+    internalPort: 8080
+    annotations:
+      fabric8.io/expose: "true"
+
+echotest:
+  interval: 10m
+  command: /bin/date
+
+hook:
+  replicaCount: 1
+  probe:
+    path: /
+  image:
+    repository: gcr.io/k8s-prow/hook
+    tag: v20180710-7b6ac39a1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 180
+  args:
+    - --dry-run=false
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+  service:
+    type: ClusterIP
+    externalPort: 80
+    internalPort: 8888
+    annotations:
+      fabric8.io/expose: "true"
+
+horologium:
+  replicaCount: 1
+  image:
+    repository: gcr.io/k8s-prow/horologium
+    tag: v20180709-7109caeb1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+  args:
+    - --dry-run=false
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+plank:
+  image:
+    repository: gcr.io/k8s-prow/plank
+    tag: v20180709-7109caeb1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+sinker:
+  replicaCount: 1
+  image:
+    repository: gcr.io/k8s-prow/sinker
+    tag: v20180709-7109caeb1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+plugins:
+  yaml: ""
+
+user: james-foo

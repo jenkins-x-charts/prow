@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "sinker.name" . }}
+  labels:
+    app: {{ template "sinker.name" . }}
+spec:
+  replicas: {{ .Values.sinker.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "sinker.name" . }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.sinker.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "sinker.name" . }}
+        image: {{ .Values.sinker.image.repository }}:{{ .Values.sinker.image.tag }}
+        imagePullPolicy: {{ .Values.sinker.imagePullPolicy }}
+{{- if .Values.sinker.env }}
+        env:
+{{- range $pkey, $pval := .Values.sinker.env }}
+        - name: {{ $pkey }}
+          value: {{ $pval }}
+{{- end }}
+{{- end }}
+        resources:
+{{ toYaml .Values.sinker.resources | indent 10 }}
+        volumeMounts:
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: config
