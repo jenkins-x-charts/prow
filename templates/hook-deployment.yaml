@@ -16,6 +16,7 @@ spec:
       labels:
         app: {{ template "hook.name" . }}
     spec:
+      serviceAccountName: {{ template "hook.name" . }}
       terminationGracePeriodSeconds: {{ .Values.hook.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "hook.name" . }}
