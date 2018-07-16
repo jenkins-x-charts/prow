@@ -4,6 +4,8 @@ metadata:
   name: config
 data:
   config.yaml: |
+    prowjob_namespace: {{ .Release.Namespace }}
+    pod_namespace: {{ .Release.Namespace }}
     periodics:
     - interval: {{ .Values.echotest.interval }}
       agent: kubernetes
