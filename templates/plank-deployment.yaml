@@ -16,6 +16,7 @@ spec:
       labels:
         app: {{ template "plank.name" . }}
     spec:
+      serviceAccountName: {{ template "plank.name" . }}
       terminationGracePeriodSeconds: {{ .Values.plank.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "plank.name" . }}

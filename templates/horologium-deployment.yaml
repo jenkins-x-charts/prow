@@ -16,6 +16,7 @@ spec:
       labels:
         app: {{ template "horologium.name" . }}
     spec:
+      serviceAccountName: {{ template "horologium.name" . }}
       terminationGracePeriodSeconds: {{ .Values.horologium.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "horologium.name" . }}

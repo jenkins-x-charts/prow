@@ -16,6 +16,7 @@ spec:
       labels:
         app: {{ template "sinker.name" . }}
     spec:
+      serviceAccountName: {{ template "sinker.name" . }}
       terminationGracePeriodSeconds: {{ .Values.sinker.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "sinker.name" . }}
