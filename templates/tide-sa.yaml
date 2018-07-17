@@ -1,4 +1,4 @@
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: {{ template "deck.name" . }}
+  name: {{ template "tide.name" . }}
