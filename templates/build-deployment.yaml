@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "build.name" . }}
+  labels:
+    app: {{ template "build.name" . }}
+spec:
+  replicas: {{ .Values.build.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "build.name" . }}
+    spec:
+      serviceAccountName: {{ template "build.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.build.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "build.name" . }}
+        image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
+        imagePullPolicy: {{ .Values.build.imagePullPolicy }}
+    {{- with .Values.build.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.build.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.build.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

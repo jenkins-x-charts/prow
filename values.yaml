@@ -87,6 +87,13 @@ plank:
      cpu: 100m
      memory: 128Mi
 
+build:
+  image:
+    repository: rawlingsj/prow-build
+    tag: test1
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+
 sinker:
   replicaCount: 1
   image:

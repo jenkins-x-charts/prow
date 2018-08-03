@@ -2,6 +2,11 @@
 {{/*
 Expand the name of the chart.
 */}}
+
+{{- define "build.name" -}}
+{{- default "prow-build" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "prow.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
