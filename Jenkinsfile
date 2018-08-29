@@ -5,7 +5,6 @@ pipeline {
     environment {
         ORG         = 'jenkinsxio'
         APP_NAME    = 'prow'
-        GIT_CREDS    = credentials('jenkins-x-git')
     }
     stages {
         stage('CI Build and Test') {
@@ -37,7 +36,7 @@ pipeline {
                         sh "git checkout master"
                         // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
                         sh "git config --global credential.helper store"
-
+                        sh "jx step git credentials"
                         sh "echo \$(jx-release-version) > VERSION"
                         sh "jx step tag --version \$(cat VERSION)"
 
