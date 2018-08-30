@@ -83,7 +83,7 @@ plank:
   image:
     # repository: gcr.io/k8s-prow/plank
     # tag: v20180709-7109caeb1
-    repository: jenkinsxio/horologium
+    repository: jenkinsxio/plank
     tag: dev_1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
