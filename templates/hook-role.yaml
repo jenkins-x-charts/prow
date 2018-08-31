@@ -4,9 +4,18 @@ metadata:
   name: {{ template "hook.name" . }}
 rules:
   - apiGroups:
-      - "prow.k8s.io"
+    - ""
     resources:
-      - prowjobs
+    - configmaps
     verbs:
-      - create
-      - list
+    - list
+    - update
+    - create
+    - get
+  - apiGroups:
+    - "prow.k8s.io"
+    resources:
+    - prowjobs
+    verbs:
+    - create
+    - list
