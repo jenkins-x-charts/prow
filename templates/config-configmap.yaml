@@ -6,11 +6,19 @@ data:
   config.yaml: |
     prowjob_namespace: {{ .Release.Namespace }}
     pod_namespace: {{ .Release.Namespace }}
-    periodics:
-    - interval: {{ .Values.echotest.interval }}
-      agent: kubernetes
-      name: echo-test
-      spec:
-        containers:
-        - image: alpine
-          command: [{{ .Values.echotest.command | quote}}]
+    tide:
+      context_options:
+        from-branch-protection: true
+      skip-unknown-contexts:
+        true
+      queries:
+      - labels:
+        - approved
+        missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - jenkins-x/dummy
