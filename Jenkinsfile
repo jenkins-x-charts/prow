@@ -12,11 +12,14 @@ pipeline {
                 branch 'PR-*'
             }
             steps {
-                container('jx-base') {
-                    sh "helm init --client-only"
+                dir ('prow') {
+                    checkout scm
+                    container('jx-base') {
+                        sh "helm init --client-only"
 
-                    sh "make build"
-                    sh "helm template ."
+                        sh "make build"
+                        sh "helm template ."
+                    }
                 }
             }
         }
