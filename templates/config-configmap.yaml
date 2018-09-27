@@ -22,3 +22,11 @@ data:
         - needs-rebase
         repos:
         - jenkins-x/dummy
+      - missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - jenkins-x/dummy-environment
