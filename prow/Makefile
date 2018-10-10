@@ -3,12 +3,18 @@ NAME := prow
 OS := $(shell uname)
 VERSION := $(shell cat ./VERSION)
 
-build: clean
+init: 
+	helm init --client-only
+
+setup: init
+	helm repo add jenkins-x-api https://chartmuseum.build.cd.jenkins-x.io 	
+	helm repo add jenkinsxio https://chartmuseum.jx.cd.jenkins-x.io 
+
+build: clean setup
 	helm dependency build
 	helm lint
 
 install: clean build
-	#helm install . --name ${NAME}
 	helm upgrade ${NAME} . --install
 
 upgrade: clean build
@@ -25,11 +31,9 @@ clean:
 release: clean build
 ifeq ($(OS),Darwin)
 	sed -i "" -e "s/version:.*/version: $(VERSION)/" Chart.yaml
-	# sed -i "" -e "s/tag:.*/tag: $(VERSION)/" values.yaml
 
 else ifeq ($(OS),Linux)
 	sed -i -e "s/version:.*/version: $(VERSION)/" Chart.yaml
-	# sed -i -e "s/tag:.*/tag: $(VERSION)/" values.yaml
 else
 	exit -1
 endif
