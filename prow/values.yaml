@@ -9,7 +9,7 @@ deck:
     #repository: gcr.io/k8s-prow/deck
     #tag: v20180709-7109caeb1
     repository: jenkinsxio/deck
-    tag: dev_15
+    tag: dev_17
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
