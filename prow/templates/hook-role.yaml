@@ -13,9 +13,22 @@ rules:
     - create
     - get
   - apiGroups:
+    - ""
+    resources:
+    - namespace
+    verbs:
+    - get
+  - apiGroups:
     - "prow.k8s.io"
     resources:
     - prowjobs
+    verbs:
+    - create
+    - list
+  - apiGroups:
+    - jenkins.io
+    resources:
+    - pipelineactivities
     verbs:
     - create
     - list
