@@ -9,7 +9,7 @@ deck:
     #repository: gcr.io/k8s-prow/deck
     #tag: v20180709-7109caeb1
     repository: jenkinsxio/deck
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -41,7 +41,7 @@ hook:
     # repository: gcr.io/k8s-prow/hook
     # tag: v20180710-7b6ac39a1
     repository: jenkinsxio/hook
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -65,7 +65,7 @@ horologium:
     # repository: gcr.io/k8s-prow/horologium
     # tag: v20180709-7109caeb1
     repository: jenkinsxio/horologium
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -83,7 +83,7 @@ plank:
     # repository: gcr.io/k8s-prow/plank
     # tag: v20180709-7109caeb1
     repository: jenkinsxio/plank
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -97,7 +97,7 @@ plank:
 build:
   image:
     repository: jenkinsxio/build
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -114,7 +114,7 @@ sinker:
     # repository: gcr.io/k8s-prow/sinker
     # tag: v20180709-7109caeb1
     repository: jenkinsxio/sinker
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -139,7 +139,7 @@ tide:
     # repository: gcr.io/k8s-prow/tide
     # tag: v20180713-92b0869d3
     repository: jenkinsxio/tide
-    tag: dev_17
+    tag: dev_18
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
