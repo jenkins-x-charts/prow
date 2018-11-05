@@ -7,8 +7,7 @@ init:
 	helm init --client-only
 
 setup: init
-	helm repo add jenkins-x-api https://chartmuseum.build.cd.jenkins-x.io 	
-	helm repo add jenkinsxio https://chartmuseum.jx.cd.jenkins-x.io 
+	helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
 
 build: clean setup
 	helm dependency build
