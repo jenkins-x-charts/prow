@@ -13,7 +13,6 @@ spec:
       labels:
         app: {{ template "tot.name" . }}
     spec:
-      serviceAccountName: {{ template "tot.name" . }}
       terminationGracePeriodSeconds: {{ .Values.tot.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "tot.name" . }}
@@ -26,14 +25,13 @@ spec:
         resources:
 {{ toYaml .Values.tot.resources | indent 10 }}
         ports:
-        - port: {{ .Values.hook.service.externalPort }}
-          targetPort: {{ .Values.hook.service.internalPort }}
-          protocol: TCP
-          name: http
+          - name: http
+            containerPort: {{ .Values.tot.service.internalPort }}
+            protocol: TCP
         volumeMounts:
         - mountPath: /store
           name: tot-volume
       volumes:
         - name: tot-volume
           persistentVolumeClaim:
-            claimName: tot-storage
+            claimName: tot

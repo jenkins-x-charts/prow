@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: batch/v1beta1
+kind: CronJob
 metadata:
   name: {{ template "branchprotector.name" . }}
   labels:
@@ -18,12 +18,12 @@ spec:
           - name: {{ template "branchprotector.name" . }}
             image: {{ .Values.branchprotector.image.repository }}:{{ .Values.branchprotector.image.tag }}
             imagePullPolicy: {{ .Values.branchprotector.imagePullPolicy }}
-    {{ if .Values.branchprotector.args }}
+{{ if .Values.branchprotector.args }}
             args:
-    {{ toYaml .Values.branchprotector.args | indent 10 }}
-    {{- end }}
+{{ toYaml .Values.branchprotector.args | indent 14 }}
+{{- end }}
             resources:
-    {{ toYaml .Values.branchprotector.resources | indent 10 }}
+{{ toYaml .Values.branchprotector.resources | indent 14 }}
             volumeMounts:
             - name: oauth
               mountPath: /etc/github

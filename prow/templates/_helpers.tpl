@@ -4,7 +4,7 @@ Expand the name of the chart.
 */}}
 
 {{- define "branchprotector.name" -}}
-{{- default "tide" .Values.branchprotector.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- default "branchprotector" .Values.branchprotector.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "build.name" -}}
@@ -40,7 +40,7 @@ Expand the name of the chart.
 {{- end -}}
 
 {{- define "tot.name" -}}
-{{- default "tide" .Values.tot.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- default "tot" .Values.tot.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
