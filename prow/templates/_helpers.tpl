@@ -3,6 +3,10 @@
 Expand the name of the chart.
 */}}
 
+{{- define "branchprotector.name" -}}
+{{- default "tide" .Values.branchprotector.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "build.name" -}}
 {{- default "prow-build" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

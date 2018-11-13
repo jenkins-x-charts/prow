@@ -54,6 +54,27 @@ tot:
   pvc:
     size: 1Gi
 
+branchprotector:
+  schedule: "54 * * * *"  # Every hour at 54 minutes past the hour
+  image:
+    repository: gcr.io/k8s-prow/branchprotector
+    tag: v20181113-9b11013
+  imagePullPolicy: IfNotPresent
+  args:
+    - --config-path=/etc/config/config.yaml
+    - --job-config-path=/etc/job-config
+    - --github-token-path=/etc/github/oauth
+    - --confirm
+    - --github-endpoint=https://api.github.com
+    # - --github-endpoint=http://ghproxy
+  resources:
+    limits:
+     cpu: 400m
+     memory: 256Mi
+    requests:
+     cpu: 200m
+     memory: 128Mi
+
 hook:
   replicaCount: 2
   probe:
