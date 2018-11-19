@@ -54,6 +54,26 @@ tot:
   pvc:
     size: 1Gi
 
+crier:
+  image:
+    repository: gcr.io/k8s-prow/crier
+    tag: v20181113-9b11013
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 180
+  args:
+    - -gerrit-workers=0
+    - -github-workers=1
+    - -logtostderr
+    - -config-path=/etc/config/config.yaml
+    - -github-token-path=/etc/github/oauth
+  resources:
+    limits:
+     cpu: 400m
+     memory: 256Mi
+    requests:
+     cpu: 200m
+     memory: 128Mi
+
 branchprotector:
   schedule: "54 * * * *"  # Every hour at 54 minutes past the hour
   image:
@@ -122,6 +142,8 @@ plank:
     tag: v20181113-9b11013
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
+  args:
+    - --dry-run=false
   resources:
     limits:
      cpu: 200m

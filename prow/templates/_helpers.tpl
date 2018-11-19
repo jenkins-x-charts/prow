@@ -15,6 +15,10 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "crier.name" -}}
+{{- default "crier" .Values.crier.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "deck.name" -}}
 {{- default "deck" .Values.deck.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
