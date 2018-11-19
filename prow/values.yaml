@@ -78,8 +78,10 @@ hook:
   probe:
     path: /
   image:
-    repository: gcr.io/k8s-prow/hook
-    tag: v20181113-9b11013
+    # repository: gcr.io/k8s-prow/hook
+    # tag: v20181113-9b11013
+    repository: rawlingsj/hook
+    tag: upstream31
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -131,7 +133,7 @@ plank:
 build:
   image:
     repository: rawlingsj/build
-    tag: upstream1
+    tag: upstream30
     # repository: gcr.io/k8s-prow/build
     # tag: v20181113-9b11013
   imagePullPolicy: IfNotPresent
