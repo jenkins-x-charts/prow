@@ -56,8 +56,8 @@ tot:
 
 crier:
   image:
-    repository: gcr.io/k8s-prow/crier
-    tag: v20181113-9b11013
+    repository: docker.io/garethjevans/crier
+    tag: upstream03
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
