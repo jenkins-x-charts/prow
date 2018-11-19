@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "plank.name" . }}
+  name: {{ template "crier.name" . }}
   labels:
-    app: {{ template "plank.name" . }}
+    app: {{ template "crier.name" . }}
 spec:
   replicas: 1
   strategy:
@@ -14,27 +14,27 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "plank.name" . }}
+        app: {{ template "crier.name" . }}
     spec:
-      serviceAccountName: {{ template "plank.name" . }}
-      terminationGracePeriodSeconds: {{ .Values.plank.terminationGracePeriodSeconds }}
+      serviceAccountName: {{ template "crier.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.crier.terminationGracePeriodSeconds }}
       containers:
-      - name: {{ template "plank.name" . }}
-        image: {{ .Values.plank.image.repository }}:{{ .Values.plank.image.tag }}
-        imagePullPolicy: {{ .Values.plank.imagePullPolicy }}
-{{ if .Values.plank.args }}
+      - name: {{ template "crier.name" . }}
+        image: {{ .Values.crier.image.repository }}:{{ .Values.crier.image.tag }}
+        imagePullPolicy: {{ .Values.crier.imagePullPolicy }}
+{{ if .Values.crier.args }}
         args:
-{{ toYaml .Values.plank.args | indent 10 }}
+{{ toYaml .Values.crier.args | indent 10 }}
 {{- end }}
-{{- if .Values.plank.env }}
+{{- if .Values.crier.env }}
         env:
-{{- range $pkey, $pval := .Values.plank.env }}
+{{- range $pkey, $pval := .Values.crier.env }}
         - name: {{ $pkey }}
           value: {{ $pval }}
 {{- end }}
 {{- end }}
         resources:
-{{ toYaml .Values.plank.resources | indent 10 }}
+{{ toYaml .Values.crier.resources | indent 10 }}
         volumeMounts:
         - name: oauth
           mountPath: /etc/github
