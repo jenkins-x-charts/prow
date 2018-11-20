@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "buildnum.name" . }}
+spec:
+  type: {{ .Values.buildnum.service.type }}
+  selector:
+    app: {{ template "buildnum.name" . }}
+  ports:
+  - port: {{ .Values.buildnum.service.externalPort }}
+    targetPort: {{ .Values.buildnum.service.internalPort }}
+    protocol: TCP
+    name: http
