@@ -20,6 +20,9 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.build.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "build.name" . }}
+        args:
+        - --tot-url
+        - http://tot
         image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
         imagePullPolicy: {{ .Values.build.imagePullPolicy }}
     {{- with .Values.build.nodeSelector }}
