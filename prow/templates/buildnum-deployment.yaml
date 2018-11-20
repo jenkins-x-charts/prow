@@ -13,6 +13,7 @@ spec:
       labels:
         app: {{ template "buildnum.name" . }}
     spec:
+      serviceAccountName: {{ template "buildnum.name" . }}
       terminationGracePeriodSeconds: {{ .Values.buildnum.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "buildnum.name" . }}

@@ -22,7 +22,7 @@ spec:
       - name: {{ template "build.name" . }}
         args:
         - --tot-url
-        - http://tot
+        - http://buildnum
         image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
         imagePullPolicy: {{ .Values.build.imagePullPolicy }}
     {{- with .Values.build.nodeSelector }}
