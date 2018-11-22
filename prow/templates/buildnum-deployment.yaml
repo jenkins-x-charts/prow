@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.buildnum.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "buildnum.name" . }}
-        image: {{ .Values.buildnum.image.repository }}:{{ .Values.buildnum.image.tag }}
+        image: {{ .Values.buildnum.image.repository }}:{{ .Values.buildnum.image.jxTag }}
         imagePullPolicy: {{ .Values.buildnum.imagePullPolicy }}
 {{ if .Values.buildnum.command }}
         command:
