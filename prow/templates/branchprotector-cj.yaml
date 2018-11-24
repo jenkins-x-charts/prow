@@ -1,3 +1,4 @@
+{{ if .Values.branchprotector.enabled }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -39,3 +40,4 @@ spec:
           - name: config
             configMap:
               name: config
+{{- end }}
