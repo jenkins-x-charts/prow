@@ -180,7 +180,7 @@ plank:
 build:
   image:
     repository: rawlingsj/build
-    tag: upstream57
+    tag: upstream76
     # repository: gcr.io/k8s-prow/build
     # tag: v20181113-9b11013
   imagePullPolicy: IfNotPresent
