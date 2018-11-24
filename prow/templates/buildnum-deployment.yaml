@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "buildnum.name" . }}
+  labels:
+    app: {{ template "buildnum.name" . }}
+spec:
+  replicas: 1 # one canonical source of build numbers
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ template "buildnum.name" . }}
+    spec:
+      serviceAccountName: {{ template "buildnum.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.buildnum.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "buildnum.name" . }}
+        image: {{ .Values.buildnum.image.repository }}:{{ .Values.buildnum.image.jxTag }}
+        imagePullPolicy: {{ .Values.buildnum.imagePullPolicy }}
+{{ if .Values.buildnum.command }}
+        command:
+{{ toYaml .Values.buildnum.command | indent 10 }}
+{{- end }}
+{{ if .Values.buildnum.args }}
+        args:
+{{ toYaml .Values.buildnum.args | indent 10 }}
+{{- end }}
+        resources:
+{{ toYaml .Values.buildnum.resources | indent 10 }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.buildnum.service.internalPort }}
+            protocol: TCP

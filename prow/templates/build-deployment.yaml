@@ -20,8 +20,31 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.build.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "build.name" . }}
+        args:
+        - --tot-url
+        - http://buildnum
         image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
         imagePullPolicy: {{ .Values.build.imagePullPolicy }}
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/started
+          failureThreshold: {{ .Values.build.failureThreshold }}
+          initialDelaySeconds: {{ .Values.build.liveInitialDelaySeconds }}
+          periodSeconds: {{ .Values.build.periodSeconds }}
+          successThreshold: {{ .Values.build.successThreshold }}
+          timeoutSeconds: {{ .Values.build.timeoutSeconds }}
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/started
+          failureThreshold: {{ .Values.build.failureThreshold }}
+          initialDelaySeconds: {{ .Values.build.readyInitialDelaySeconds }}
+          periodSeconds: {{ .Values.build.periodSeconds }}
+          successThreshold: {{ .Values.build.successThreshold }}
+          timeoutSeconds: {{ .Values.build.timeoutSeconds }}
     {{- with .Values.build.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

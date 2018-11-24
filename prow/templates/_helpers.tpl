@@ -3,12 +3,20 @@
 Expand the name of the chart.
 */}}
 
+{{- define "branchprotector.name" -}}
+{{- default "branchprotector" .Values.branchprotector.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "build.name" -}}
 {{- default "prow-build" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "prow.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "crier.name" -}}
+{{- default "crier" .Values.crier.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "deck.name" -}}
@@ -33,6 +41,14 @@ Expand the name of the chart.
 
 {{- define "tide.name" -}}
 {{- default "tide" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "tot.name" -}}
+{{- default "tot" .Values.tot.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "buildnum.name" -}}
+{{- default "buildnum" .Values.buildnum.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
