@@ -193,8 +193,8 @@ build:
      cpu: 100m
      memory: 128Mi
   failureThreshold: 1
-  readyInitialDelaySeconds: 10
-  liveInitialDelaySeconds: 3
+  readyInitialDelaySeconds: 5
+  liveInitialDelaySeconds: 60
   periodSeconds: 2
   successThreshold: 1
   timeoutSeconds: 1
