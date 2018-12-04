@@ -45,6 +45,8 @@ spec:
           periodSeconds: {{ .Values.build.periodSeconds }}
           successThreshold: {{ .Values.build.successThreshold }}
           timeoutSeconds: {{ .Values.build.timeoutSeconds }}
+        resources:
+{{ toYaml .Values.build.resources | indent 10 }}
     {{- with .Values.build.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
