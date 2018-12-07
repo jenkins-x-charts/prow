@@ -2,4 +2,4 @@ apiVersion: v1
 description: A Helm chart for Prow
 name: prow
 version: 0.0.1-SNAPSHOT
-icon: https://rawgit.com/jenkins-x/jenkins-x-platform/08df980/images/kubernetes.png
+icon: https://cdn.jsdelivr.net/gh/jenkins-x/jenkins-x-platform@08df980/images/kubernetes.png
