@@ -31,29 +31,6 @@ echotest:
   interval: 10m
   command: /bin/date
 
-tot:
-  image:
-    repository: gcr.io/k8s-prow/tot
-    tag: v20181113-9b11013
-  imagePullPolicy: IfNotPresent
-  terminationGracePeriodSeconds: 180
-  args:
-    - -storage=/store/tot.json
-    - -fallback
-  resources:
-    limits:
-     cpu: 400m
-     memory: 256Mi
-    requests:
-     cpu: 200m
-     memory: 128Mi
-  service:
-    type: ClusterIP
-    externalPort: 80
-    internalPort: 8888
-  pvc:
-    size: 1Gi
-
 buildnum:
   image:
     repository: jenkinsxio/jx

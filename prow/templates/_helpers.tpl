@@ -43,10 +43,6 @@ Expand the name of the chart.
 {{- default "tide" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "tot.name" -}}
-{{- default "tot" .Values.tot.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
 {{- define "buildnum.name" -}}
 {{- default "buildnum" .Values.buildnum.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
