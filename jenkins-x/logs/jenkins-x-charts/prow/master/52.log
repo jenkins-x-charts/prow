@@ -31,3 +31,17 @@ Happy Helming!
 helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
 "jenkins-x" has been added to your repositories
 helm dependency build
+No requirements found in ./charts.
+helm lint
+==> Linting .
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.0.94/" Chart.yaml
+helm package .
+Successfully packaged chart and saved it to: /workspace/prow/prow-0.0.94.tgz
+curl --fail -u admin:jxadmin18 --data-binary "@prow-0.0.94.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  6394  100    14  100  6380     39  18075 --:--:-- --:--:-- --:--:-- 18125
+{"saved":true}rm -rf prow*.tgz
