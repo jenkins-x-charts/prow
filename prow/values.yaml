@@ -34,7 +34,7 @@ echotest:
 buildnum:
   image:
     repository: jenkinsxio/jx
-    jxTag: 1.3.770
+    jxTag: 1.3.771
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   command:
