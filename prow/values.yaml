@@ -179,10 +179,8 @@ build:
 sinker:
   replicaCount: 1
   image:
-    repository: rawlingsj/tide
-    tag: upstream1
-    # repository: gcr.io/k8s-prow/sinker
-    # tag: v20181113-9b11013
+    repository: gcr.io/k8s-prow/sinker
+    tag: v20181113-9b11013
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -204,8 +202,10 @@ tide:
   probe:
     path: /
   image:
-    repository: gcr.io/k8s-prow/tide
-    tag: v20181113-9b11013
+    repository: rawlingsj/tide
+    tag: upstream1
+    # repository: gcr.io/k8s-prow/tide
+    # tag: v20181113-9b11013
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
