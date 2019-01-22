@@ -11,7 +11,8 @@ deck:
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
-    - --hook-url=http://hook:8888/plugin-help
+    - --hook-url=http://hook/plugin-help
+    - --tide-url=http://tide
   resources:
     limits:
      cpu: 200m
