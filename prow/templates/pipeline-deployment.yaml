@@ -1,11 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "build.name" . }}
+  name: {{ template "pipeline.name" . }}
   labels:
-    app: {{ template "build.name" . }}
+    app: {{ template "pipeline.name" . }}
 spec:
-  replicas: {{ .Values.build.replicaCount }}
+  replicas: {{ .Values.pipeline.replicaCount }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,34 +14,34 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "build.name" . }}
+        app: {{ template "pipeline.name" . }}
     spec:
-      serviceAccountName: {{ template "build.name" . }}
-      terminationGracePeriodSeconds: {{ .Values.build.terminationGracePeriodSeconds }}
+      serviceAccountName: {{ template "pipeline.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.pipeline.terminationGracePeriodSeconds }}
       containers:
-      - name: {{ template "build.name" . }}
+      - name: {{ template "pipeline.name" . }}
         args:
         - --tot-url
         - http://buildnum
         - --config
         - /etc/config/config.yaml
-        image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
-        imagePullPolicy: {{ .Values.build.imagePullPolicy }}
+        image: {{ .Values.pipeline.image.repository }}:{{ .Values.pipeline.image.tag }}
+        imagePullPolicy: {{ .Values.pipeline.imagePullPolicy }}
         volumeMounts:
         - mountPath: /etc/config
           name: config
           readOnly: true
         resources:
-{{ toYaml .Values.build.resources | indent 10 }}
-    {{- with .Values.build.nodeSelector }}
+{{ toYaml .Values.pipeline.resources | indent 10 }}
+    {{- with .Values.pipeline.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.build.affinity }}
+    {{- with .Values.pipeline.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.build.tolerations }}
+    {{- with .Values.pipeline.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
