@@ -38,6 +38,9 @@ buildnum:
     jxTag: 1.3.812
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
+  probe:
+    livenessPath: /health
+    readinessPath: /ready
   command:
   - jx
   args:
