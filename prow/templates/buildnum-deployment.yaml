@@ -33,3 +33,11 @@ spec:
           - name: http
             containerPort: {{ .Values.buildnum.service.internalPort }}
             protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.buildnum.probe.livenessPath }}
+            port: http
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.buildnum.probe.readinessPath }}
+            port: http
