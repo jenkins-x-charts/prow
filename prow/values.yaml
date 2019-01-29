@@ -61,8 +61,8 @@ buildnum:
 
 crier:
   image:
-    repository: docker.io/garethjevans/crier
-    tag: upstream03
+    repository: rawlingsj/crier
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -104,10 +104,8 @@ hook:
   probe:
     path: /
   image:
-    # repository: gcr.io/k8s-prow/hook
-    # tag: v20181113-9b11013
     repository: rawlingsj/hook
-    tag: upstream56
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -125,11 +123,12 @@ hook:
     internalPort: 8888
     annotations:
       fabric8.io/expose: "true"
+
 horologium:
   replicaCount: 1
   image:
-    repository: gcr.io/k8s-prow/horologium
-    tag: v20181113-9b11013
+    repository: rawlingsj/horologium
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -144,8 +143,8 @@ horologium:
 
 plank:
   image:
-    repository: gcr.io/k8s-prow/plank
-    tag: v20181113-9b11013
+    repository: rawlingsj/plank
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -161,9 +160,21 @@ plank:
 build:
   image:
     repository: rawlingsj/build
-    tag: upstream125
-    # repository: gcr.io/k8s-prow/build
-    # tag: v20181113-9b11013
+    tag: pipeline11
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 30
+  resources:
+    limits:
+     cpu: 200m
+     memory: 256Mi
+    requests:
+     cpu: 100m
+     memory: 128Mis
+
+pipeline:
+  image:
+    repository: rawlingsj/pipeline
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -173,18 +184,12 @@ build:
     requests:
      cpu: 100m
      memory: 128Mi
-  failureThreshold: 1
-  readyInitialDelaySeconds: 5
-  liveInitialDelaySeconds: 60
-  periodSeconds: 2
-  successThreshold: 1
-  timeoutSeconds: 1
 
 sinker:
   replicaCount: 1
   image:
-    repository: gcr.io/k8s-prow/sinker
-    tag: v20181113-9b11013
+    repository: rawlingsj/sinker
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -207,9 +212,7 @@ tide:
     path: /
   image:
     repository: rawlingsj/tide
-    tag: upstream1
-    # repository: gcr.io/k8s-prow/tide
-    # tag: v20181113-9b11013
+    tag: pipeline11
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
