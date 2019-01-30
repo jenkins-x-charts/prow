@@ -169,7 +169,7 @@ build:
      memory: 256Mi
     requests:
      cpu: 100m
-     memory: 128Mi
+     memory: 128Mis
 
 pipeline:
   image:
