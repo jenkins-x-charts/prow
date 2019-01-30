@@ -27,26 +27,6 @@ spec:
         - /etc/config/config.yaml
         image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
         imagePullPolicy: {{ .Values.build.imagePullPolicy }}
-        livenessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/started
-          failureThreshold: {{ .Values.build.failureThreshold }}
-          initialDelaySeconds: {{ .Values.build.liveInitialDelaySeconds }}
-          periodSeconds: {{ .Values.build.periodSeconds }}
-          successThreshold: {{ .Values.build.successThreshold }}
-          timeoutSeconds: {{ .Values.build.timeoutSeconds }}
-        readinessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/started
-          failureThreshold: {{ .Values.build.failureThreshold }}
-          initialDelaySeconds: {{ .Values.build.readyInitialDelaySeconds }}
-          periodSeconds: {{ .Values.build.periodSeconds }}
-          successThreshold: {{ .Values.build.successThreshold }}
-          timeoutSeconds: {{ .Values.build.timeoutSeconds }}
         volumeMounts:
         - mountPath: /etc/config
           name: config
