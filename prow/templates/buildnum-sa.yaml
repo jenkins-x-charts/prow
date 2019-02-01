@@ -1,4 +1,4 @@
-{{ if !.Values.buildnum.enabled }}
+{{ if Values.buildnum.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
