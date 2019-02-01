@@ -43,6 +43,10 @@ Expand the name of the chart.
 {{- default "tide" .Values.tide.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "pipelinerunner.name" -}}
+{{- default "pipelinerunner" .Values.buildnum.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "buildnum.name" -}}
 {{- default "buildnum" .Values.buildnum.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
