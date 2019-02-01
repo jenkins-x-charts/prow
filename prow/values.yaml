@@ -6,8 +6,8 @@ deck:
   probe:
     path: /
   image:
-    repository: gcr.io/k8s-prow/deck
-    tag: v20181113-9b11013
+    repository: jenkinsxio/deck
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -88,8 +88,8 @@ buildnum:
 
 crier:
   image:
-    repository: rawlingsj/crier
-    tag: pipeline11
+    repository: jenkinsxio/crier
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -131,8 +131,8 @@ hook:
   probe:
     path: /
   image:
-    repository: rawlingsj/hook
-    tag: pipeline11
+    repository: jenkinsxio/hook
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -154,8 +154,8 @@ hook:
 horologium:
   replicaCount: 1
   image:
-    repository: rawlingsj/horologium
-    tag: pipeline11
+    repository: jenkinsxio/horologium
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -170,8 +170,8 @@ horologium:
 
 plank:
   image:
-    repository: rawlingsj/plank
-    tag: pipeline11
+    repository: jenkinsxio/plank
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -186,8 +186,8 @@ plank:
 
 build:
   image:
-    repository: rawlingsj/build
-    tag: pipeline11
+    repository: jenkinsxio/build
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -200,8 +200,8 @@ build:
 
 pipeline:
   image:
-    repository: rawlingsj/pipeline
-    tag: pipeline11
+    repository: jenkinsxio/pipeline
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -215,8 +215,8 @@ pipeline:
 sinker:
   replicaCount: 1
   image:
-    repository: rawlingsj/sinker
-    tag: pipeline11
+    repository: jenkinsxio/sinker
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -238,8 +238,8 @@ tide:
   probe:
     path: /
   image:
-    repository: rawlingsj/tide
-    tag: pipeline11
+    repository: jenkinsxio/tide
+    tag: pipeline1
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
