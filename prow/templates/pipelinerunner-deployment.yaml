@@ -1,0 +1,45 @@
+{{ if .Values.pipelinerunner.enabled }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "pipelinerunner.name" . }}
+  labels:
+    app: {{ template "pipelinerunner.name" . }}
+spec:
+  replicas: 1 # one canonical source of build numbers
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ template "pipelinerunner.name" . }}
+    spec:
+      serviceAccountName: {{ template "pipelinerunner.name" . }}
+      terminationGracePeriodSeconds: {{ .Values.pipelinerunner.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ template "pipelinerunner.name" . }}
+        image: {{ .Values.pipelinerunner.image.repository }}:{{ .Values.pipelinerunner.image.jxTag }}
+        imagePullPolicy: {{ .Values.pipelinerunner.imagePullPolicy }}
+{{ if .Values.pipelinerunner.command }}
+        command:
+{{ toYaml .Values.pipelinerunner.command | indent 10 }}
+{{- end }}
+{{ if .Values.pipelinerunner.args }}
+        args:
+{{ toYaml .Values.pipelinerunner.args | indent 10 }}
+{{- end }}
+        resources:
+{{ toYaml .Values.pipelinerunner.resources | indent 10 }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.pipelinerunner.service.internalPort }}
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.pipelinerunner.probe.livenessPath }}
+            port: http
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.pipelinerunner.probe.readinessPath }}
+            port: http
+{{ end }}

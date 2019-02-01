@@ -1,0 +1,15 @@
+{{ if .Values.pipelinerunner.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "pipelinerunner.name" . }}
+spec:
+  type: {{ .Values.pipelinerunner.service.type }}
+  selector:
+    app: {{ template "pipelinerunner.name" . }}
+  ports:
+  - port: {{ .Values.pipelinerunner.service.externalPort }}
+    targetPort: {{ .Values.pipelinerunner.service.internalPort }}
+    protocol: TCP
+    name: http
+{{ end }}

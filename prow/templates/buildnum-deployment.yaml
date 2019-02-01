@@ -1,3 +1,4 @@
+{{ if .Values.buildnum.enabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -41,3 +42,4 @@ spec:
           httpGet:
             path: {{ .Values.buildnum.probe.readinessPath }}
             port: http
+{{ end }}

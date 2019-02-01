@@ -1,8 +1,8 @@
-{{ if .Values.buildnum.enabled }}
+{{ if .Values.pipelinerunner.enabled }}
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: {{ template "buildnum.name" . }}
+  name: {{ template "pipelinerunner.name" . }}
 rules:
   - apiGroups:
       - jenkins.io
