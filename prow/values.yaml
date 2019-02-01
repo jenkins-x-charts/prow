@@ -32,7 +32,35 @@ echotest:
   interval: 10m
   command: /bin/date
 
+pipelinerunner:
+  enabled: false
+  image:
+    repository: jenkinsxio/jx
+    jxTag: 1.3.821
+  imagePullPolicy: IfNotPresent
+  terminationGracePeriodSeconds: 180
+  probe:
+    livenessPath: /health
+    readinessPath: /ready
+  command:
+  - jx
+  args:
+  - "controller"
+  - "pipelinerunner"
+  resources:
+    limits:
+     cpu: 400m
+     memory: 256Mi
+    requests:
+     cpu: 200m
+     memory: 128Mi
+  service:
+    type: ClusterIP
+    externalPort: 80
+    internalPort: 8080
+
 buildnum:
+  enabled: true
   image:
     repository: jenkinsxio/jx
     jxTag: 1.3.822
@@ -57,7 +85,6 @@ buildnum:
     type: ClusterIP
     externalPort: 80
     internalPort: 8080
-
 
 crier:
   image:

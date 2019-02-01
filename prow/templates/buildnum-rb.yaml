@@ -1,3 +1,4 @@
+{{ if !.Values.buildnum.enabled }}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
@@ -9,3 +10,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: {{ template "buildnum.name" . }}
+{{ end }}

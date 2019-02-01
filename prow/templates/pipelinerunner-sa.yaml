@@ -1,0 +1,6 @@
+{{ if .Values.pipelinerunner.enabled }}
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: {{ template "pipelinerunner.name" . }}
+{{ end }}
