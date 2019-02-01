@@ -1,4 +1,4 @@
-{{ if Values.buildnum.enabled }}
+{{ if .Values.buildnum.enabled }}
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
