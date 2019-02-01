@@ -9,10 +9,11 @@ rules:
     resources:
       - pipelineactivities
     verbs:
-      - create
-      - list
-      - update
       - get
+      - watch
+      - list
+      - create
+      - update
   - apiGroups:
     - ""
     resources:
