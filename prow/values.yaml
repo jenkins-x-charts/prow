@@ -36,7 +36,7 @@ pipelinerunner:
   enabled: false
   image:
     repository: jenkinsxio/jx
-    jxTag: 1.3.873
+    jxTag: 1.3.874
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   probe:
@@ -63,7 +63,7 @@ buildnum:
   enabled: true
   image:
     repository: jenkinsxio/jx
-    jxTag: 1.3.873
+    jxTag: 1.3.874
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   probe:
