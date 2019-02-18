@@ -4,21 +4,35 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: {{ template "pipelinerunner.name" . }}
 rules:
-  - apiGroups:
-      - jenkins.io
-    resources:
-      - pipelineactivities
-    verbs:
-      - create
-      - list
-      - update
-      - get
-  - apiGroups:
-    - ""
-    resources:
-    - namespaces
-    verbs:
-    - get
-    - list
-    - watch
+- apiGroups:
+  - jenkins.io
+  resources:
+  - pipelineactivities
+  - environments
+  verbs:
+  - create
+  - list
+  - update
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - pipeline.knative.dev
+  resources:
+  - pipelineresources
+  - tasks
+  - pipelines
+  - pipelineruns
+  verbs:
+  - create
+  - list
+  - get
+  - update
 {{ end }}    
