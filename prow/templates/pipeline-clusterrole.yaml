@@ -4,7 +4,7 @@ metadata:
   name: {{ template "pipeline.name" . }}
 rules:
 - apiGroups:
-  - pipeline.knative.dev
+  - tekton.dev
   resources:
   - pipelineruns
   verbs:
