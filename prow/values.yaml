@@ -7,7 +7,7 @@ deck:
     path: /
   image:
     repository: jenkinsxio/deck
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -91,7 +91,7 @@ buildnum:
 crier:
   image:
     repository: jenkinsxio/crier
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -134,7 +134,7 @@ hook:
     path: /
   image:
     repository: jenkinsxio/hook
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -157,7 +157,7 @@ horologium:
   replicaCount: 1
   image:
     repository: jenkinsxio/horologium
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -173,7 +173,7 @@ horologium:
 plank:
   image:
     repository: jenkinsxio/plank
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -189,7 +189,7 @@ plank:
 build:
   image:
     repository: jenkinsxio/build
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -203,7 +203,7 @@ build:
 pipeline:
   image:
     repository: jenkinsxio/pipeline
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -218,7 +218,7 @@ sinker:
   replicaCount: 1
   image:
     repository: jenkinsxio/sinker
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -241,7 +241,7 @@ tide:
     path: /
   image:
     repository: jenkinsxio/tide
-    tag: pipeline13
+    tag: pipeline14
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
