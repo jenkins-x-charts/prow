@@ -47,8 +47,6 @@ pipelinerunner:
   args:
   - "controller"
   - "pipelinerunner"
-  - "--service-account"
-  - "build-bot"
   resources:
     limits:
      cpu: 400m
