@@ -30,6 +30,13 @@ spec:
 {{- end }}
         resources:
 {{ toYaml .Values.pipelinerunner.resources | indent 10 }}
+{{- if .Values.pipelinerunner.env }}
+        env:
+{{- range $pkey, $pval := .Values.pipelinerunner.env }}
+          - name: {{ $pkey }}
+            value: {{ $pval }}
+{{- end }}
+{{- end }}
         ports:
           - name: http
             containerPort: {{ .Values.pipelinerunner.service.internalPort }}
