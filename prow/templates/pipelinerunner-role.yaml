@@ -8,12 +8,14 @@ rules:
   - jenkins.io
   resources:
   - pipelineactivities
+  - pipelinestructures
   - environments
   verbs:
   - create
   - list
   - update
   - get
+  - watch
 - apiGroups:
   - ""
   resources:
