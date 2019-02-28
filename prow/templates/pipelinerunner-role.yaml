@@ -9,6 +9,7 @@ rules:
   resources:
   - pipelineactivities
   - environments
+  - pipelinestructures
   verbs:
   - create
   - list
