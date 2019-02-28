@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.pipelinerunner.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "pipelinerunner.name" . }}
-        image: {{ .Values.pipelinerunner.image.repository }}:{{ .Values.pipelinerunner.image.jxTag }}
+        image: {{ .Values.pipelinerunner.image.repository }}:{{ .Values.pipelinerunner.image.tag }}
         imagePullPolicy: {{ .Values.pipelinerunner.imagePullPolicy }}
 {{ if .Values.pipelinerunner.command }}
         command:
