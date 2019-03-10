@@ -35,7 +35,7 @@ echotest:
 pipelinerunner:
   enabled: false
   image:
-    repository: jenkinsxio/builder-maven
+    repository: gcr.io/jenkinsxio/builder-maven
     tag: 0.1.281
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
