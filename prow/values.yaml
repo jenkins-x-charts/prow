@@ -68,7 +68,7 @@ buildnum:
   enabled: true
   image:
     repository: jenkinsxio/jx
-    jxTag: 1.3.976
+    jxTag: 1.3.977
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   probe:
