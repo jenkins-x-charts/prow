@@ -11,8 +11,6 @@ pipelineConfig:
           - command: make
             args:
             - build
-            - -f
-            - /workspace/workspace/prow/Makefile
     release:
       pipeline:
         agent:
@@ -45,5 +43,3 @@ pipelineConfig:
           - command: make
             args:
             - release
-            - -f
-            - /workspace/workspace/prow/Makefile
