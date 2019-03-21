@@ -6,7 +6,6 @@ image:
   repository: jenkinsxio
   tag: pipeline14
 
-
 deck:
   replicaCount: 2
   probe:
