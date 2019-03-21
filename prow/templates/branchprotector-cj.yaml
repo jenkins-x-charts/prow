@@ -17,7 +17,7 @@ spec:
         spec:
           containers:
           - name: {{ template "branchprotector.name" . }}
-            image: {{ .Values.branchprotector.image.repository }}:{{ .Values.branchprotector.image.tag }}
+            image: {{ tpl .Values.branchprotector.image.repository . }}:{{ tpl .Values.branchprotector.image.tag . }}
             imagePullPolicy: {{ .Values.branchprotector.imagePullPolicy }}
 {{ if .Values.branchprotector.args }}
             args:

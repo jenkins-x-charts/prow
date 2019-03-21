@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.horologium.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "horologium.name" . }}
-        image: {{ .Values.horologium.image.repository }}:{{ .Values.horologium.image.tag }}
+        image: {{ tpl .Values.horologium.image.repository . }}:{{ tpl .Values.horologium.image.tag . }}
         imagePullPolicy: {{ .Values.horologium.imagePullPolicy }}
 {{- if .Values.horologium.env }}
         env:

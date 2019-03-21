@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.hook.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "hook.name" . }}
-        image: {{ .Values.hook.image.repository }}:{{ .Values.hook.image.tag }}
+        image: {{ tpl .Values.hook.image.repository . }}:{{ tpl .Values.hook.image.tag . }}
         imagePullPolicy: {{ .Values.hook.imagePullPolicy }}
 {{ if .Values.hook.args }}
         args:
