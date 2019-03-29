@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: jenkinsxio
-  tag: pipeline14
+  repository: gcr.io/jenkinsx-dev/cosmin
+  tag: v20190322-389dc3390-dirty
 
 deck:
   replicaCount: 2
