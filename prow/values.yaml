@@ -1,13 +1,18 @@
 # Default values for prow.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
+image:
+  repository: gcr.io/jenkinsx-dev/cosmin
+  tag: v20190329-d9bf4c8da-dirty
+
 deck:
   replicaCount: 2
   probe:
     path: /
   image:
-    repository: jenkinsxio/deck
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/deck"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -93,8 +98,8 @@ buildnum:
 
 crier:
   image:
-    repository: jenkinsxio/crier
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/crier"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -115,8 +120,8 @@ branchprotector:
   enabled: false
   schedule: "54 * * * *"  # Every hour at 54 minutes past the hour
   image:
-    repository: gcr.io/k8s-prow/branchprotector
-    tag: v20181113-9b11013
+    repository: "{{ .Values.image.repository }}/branchprotector"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   args:
     - --config-path=/etc/config/config.yaml
@@ -136,8 +141,8 @@ hook:
   probe:
     path: /
   image:
-    repository: jenkinsxio/hook
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/hook"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   args:
@@ -159,8 +164,8 @@ hook:
 horologium:
   replicaCount: 1
   image:
-    repository: jenkinsxio/horologium
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/horologium"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -175,8 +180,8 @@ horologium:
 
 plank:
   image:
-    repository: jenkinsxio/plank
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/plank"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:
@@ -191,8 +196,8 @@ plank:
 
 build:
   image:
-    repository: jenkinsxio/build
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/build"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -205,8 +210,8 @@ build:
 
 pipeline:
   image:
-    repository: jenkinsxio/pipeline
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/pipeline"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -220,8 +225,8 @@ pipeline:
 sinker:
   replicaCount: 1
   image:
-    repository: jenkinsxio/sinker
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/sinker"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   resources:
@@ -243,8 +248,8 @@ tide:
   probe:
     path: /
   image:
-    repository: jenkinsxio/tide
-    tag: pipeline14
+    repository: "{{ .Values.image.repository }}/tide"
+    tag: "{{ .Values.image.tag }}"
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 30
   args:

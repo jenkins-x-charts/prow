@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.sinker.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "sinker.name" . }}
-        image: {{ .Values.sinker.image.repository }}:{{ .Values.sinker.image.tag }}
+        image: {{ tpl .Values.sinker.image.repository . }}:{{ tpl .Values.sinker.image.tag . }}
         imagePullPolicy: {{ .Values.sinker.imagePullPolicy }}
 {{- if .Values.sinker.env }}
         env:

@@ -25,7 +25,7 @@ spec:
         - http://buildnum
         - --config
         - /etc/config/config.yaml
-        image: {{ .Values.build.image.repository }}:{{ .Values.build.image.tag }}
+        image: {{ tpl .Values.build.image.repository . }}:{{ tpl .Values.build.image.tag . }}
         imagePullPolicy: {{ .Values.build.imagePullPolicy }}
         volumeMounts:
         - mountPath: /etc/config

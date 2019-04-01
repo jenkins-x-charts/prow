@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.plank.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "plank.name" . }}
-        image: {{ .Values.plank.image.repository }}:{{ .Values.plank.image.tag }}
+        image: {{ tpl .Values.plank.image.repository . }}:{{ tpl .Values.plank.image.tag . }}
         imagePullPolicy: {{ .Values.plank.imagePullPolicy }}
 {{ if .Values.plank.args }}
         args:

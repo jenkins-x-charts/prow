@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.tide.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "tide.name" . }}
-        image: {{ .Values.tide.image.repository }}:{{ .Values.tide.image.tag }}
+        image: {{ tpl .Values.tide.image.repository . }}:{{ tpl .Values.tide.image.tag . }}
         imagePullPolicy: {{ .Values.tide.imagePullPolicy }}
 {{ if .Values.tide.args }}
         args:

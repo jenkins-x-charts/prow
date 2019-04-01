@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.deck.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "deck.name" . }}
-        image: {{ .Values.deck.image.repository }}:{{ .Values.deck.image.tag }}
+        image: {{ tpl .Values.deck.image.repository . }}:{{ tpl .Values.deck.image.tag . }}
         imagePullPolicy: {{ .Values.deck.imagePullPolicy }}
 {{ if .Values.deck.args }}
         args:

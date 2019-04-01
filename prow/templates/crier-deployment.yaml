@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.crier.terminationGracePeriodSeconds }}
       containers:
       - name: {{ template "crier.name" . }}
-        image: {{ .Values.crier.image.repository }}:{{ .Values.crier.image.tag }}
+        image: {{ tpl .Values.crier.image.repository . }}:{{ tpl .Values.crier.image.tag . }}
         imagePullPolicy: {{ .Values.crier.imagePullPolicy }}
 {{ if .Values.crier.args }}
         args:
