@@ -9,7 +9,12 @@ image:
 deck:
   replicaCount: 2
   probe:
-    path: /
+    liveness:
+      path: /healthz
+      port: 8081
+    readiness:
+      path: /healthz/ready
+      port: 8081
   image:
     repository: "{{ .Values.image.repository }}/deck"
     tag: "{{ .Values.image.tag }}"
