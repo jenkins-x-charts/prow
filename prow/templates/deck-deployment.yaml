@@ -32,12 +32,17 @@ spec:
             protocol: TCP
         livenessProbe:
           httpGet:
-            path: {{ .Values.deck.probe.path }}
-            port: http
+            path: {{ .Values.deck.probe.liveness.path }}
+            port: {{ .Values.deck.probe.liveness.port }}
+          initialDelaySeconds: 3
+          periodSeconds: 3
         readinessProbe:
           httpGet:
-            path: {{ .Values.deck.probe.path }}
-            port: http
+            path: {{ .Values.deck.probe.readiness.path }}
+            port: {{ .Values.deck.probe.readiness.port }}
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
 {{- if .Values.deck.env }}
         env:
 {{- range $pkey, $pval := .Values.deck.env }}
