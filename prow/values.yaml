@@ -4,7 +4,7 @@
 
 image:
   repository: gcr.io/jenkinsx-dev/cosmin
-  tag: v20190329-d9bf4c8da-dirty
+  tag: v20190405-7d0bf795c
 
 deck:
   replicaCount: 2
