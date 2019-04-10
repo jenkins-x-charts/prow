@@ -1,0 +1,382 @@
+Step: build-step-credential-initializer-d82d9:
+
+{"level":"warn","ts":1554902909.5709045,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554902909.5719762,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-jenkins-x-environment-tekton-mo-hxfdf:
+
+{"level":"warn","ts":1554902910.4914982,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554902911.6932116,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/jenkins-x/environment-tekton-mole-dev\" @ \"v0.0.76\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:75b5d02be0bd96946372e601d96a91afe95ecc4e
+time="2019-04-10T13:28:33Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-helm-build:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Modified file /workspace/source/env/Chart.yaml to set the chart to version 91
+No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: jenkins-x http://chartmuseum.jenkins-x.io
+Successfully added Helm repository jenkins-x.
+Adding missing Helm repo: releases http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository releases.
+Adding missing Helm repo: repo8 https://charts.bitnami.com/bitnami
+Successfully added Helm repository repo8.
+No --namespace option specified or $DEPLOY_NAMESPACE environment variable available so defaulting to using namespace **
+Applying helm chart at . as release name jenkins-x to namespace **
+time="2019-04-10T13:29:12Z" level=info msg="dir: %!(EXTRA string=.)"
+Fetching secrets from vault into directory "."
+Saved secrets file secrets.yaml
+Saved secrets file templates/**-install-config-secret.yaml
+adding secret file secrets.yaml
+adding secret file templates/**-install-config-secret.yaml
+Ignoring templates/000-namespace.yaml
+Ignoring templates/cert-manager-infra-certificate..yaml
+Ignoring templates/cert-manager-prod-issuer.yaml
+Ignoring templates/dev-env.yaml
+Ignoring templates/external-dns-secret.yaml
+Ignoring templates/gcs-copy-cj.yaml
+Ignoring templates/gh-secret.yaml
+Ignoring templates/ghe-secret.yaml
+Ignoring templates/ingress-config-configmap.yaml
+Ignoring templates/**-install-config-configmap.yaml
+Ignoring templates/**-install-config-secret.yaml
+Ignoring templates/limits.yaml
+Ignoring templates/production-env.yaml
+Ignoring templates/staging-env.yaml
+Wrote chart values.yaml values.yaml generated from directory tree
+generated helm values.yaml
+
+controllerbuild:
+  enabled: true
+controllerworkflow:
+  enabled: false
+external-dns:
+  domainFilters:
+  - jrawlings.co.uk
+  google:
+    project: jenkins-x-infra
+    serviceAccount: external-dns
+  provider: google
+  rbac:
+    create: "true"
+  sources:
+  - ingress
+jenkins:
+  enabled: false
+jenkins-x-platform:
+  PipelineSecrets:
+    DockerConfig: |-
+      {
+          "credHelpers": {
+              "gcr.io": "gcloud",
+              "us.gcr.io": "gcloud",
+              "eu.gcr.io": "gcloud",
+              "asia.gcr.io": "gcloud",
+              "staging-k8s.gcr.io": "gcloud"
+          }
+      }
+  chartmuseum:
+    enabled: true
+    env:
+      open:
+        AUTH_ANONYMOUS_GET: true
+        DISABLE_API: false
+        STORAGE: google
+        STORAGE_GOOGLE_BUCKET: chartmuseum.jenkins-x.io
+        STORAGE_GOOGLE_PREFIX: charts
+    gcp:
+      secret:
+        enabled: true
+        key: gcs-chartmuseum.key.json
+        name: gcs-jenkinsx-chartmuseum
+    image:
+      tag: v0.7.1
+  controllerbuild:
+    enabled: true
+  dockerRegistry: gcr.io
+  jenkins:
+    Agent:
+      PodTemplates:
+        Go:
+          Containers:
+            Go:
+              Image: jenkinsxio/builder-go:latest
+        Maven:
+          Containers:
+            Maven:
+              Image: jenkinsxio/builder-maven:latest
+          volumes:
+          - mountPath: /root/.m2/
+            secretName: jenkins-maven-settings
+            type: Secret
+          - mountPath: /home/jenkins/.docker
+            secretName: jenkins-docker-cfg
+            type: Secret
+        Nodejs:
+          Containers:
+            Nodejs:
+              Image: jenkinsxio/builder-nodejs:latest
+  monocular:
+    api:
+      livenessProbe:
+        initialDelaySeconds: 1000
+  nexus:
+    persistence:
+      size: 100Gi
+  postinstalljob:
+    enabled: "true"
+prow:
+  auth:
+    git:
+      username: rawlingsj
+  buildnum:
+    enabled: false
+  image:
+    repository: gcr.io/jenkins-x-infra/prow
+    tag: v20190410-7d0bf795c
+  pipelinerunner:
+    enabled: "true"
+    image:
+      repository: rawlingsj80/builder-maven
+      tag: wip53
+  sinker:
+    replicaCount: 0
+  tillerNamespace: ""
+tekton:
+  auth:
+    git:
+      username: rawlingsj
+  tillerNamespace: ""
+
+
+Using values files: values.yaml, secrets.yaml, templates/**-install-config-secret.yaml
+Applying chart overrides
+Applying generated chart . YAML via kubectl in dir: /tmp/helm-template-workdir-536957020/jenkins-x/output
+deployment.extensions/jenkins-x-chartmuseum configured
+persistentvolumeclaim/jenkins-x-chartmuseum configured
+secret/jenkins-x-chartmuseum configured
+service/jenkins-x-chartmuseum configured
+clusterrole.rbac.authorization.k8s.io/jenkins-x-kube-state-metrics configured
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-x-kube-state-metrics configured
+deployment.extensions/jenkins-x-kube-state-metrics configured
+service/jenkins-x-kube-state-metrics configured
+serviceaccount/jenkins-x-kube-state-metrics configured
+secret/jenkins-x-datadog configured
+clusterrole.rbac.authorization.k8s.io/jenkins-x-datadog configured
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-x-datadog configured
+daemonset.extensions/jenkins-x-datadog configured
+serviceaccount/jenkins-x-datadog configured
+clusterrole.rbac.authorization.k8s.io/jenkins-x-external-dns configured
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-x-external-dns configured
+deployment.extensions/jenkins-x-external-dns configured
+serviceaccount/jenkins-x-external-dns configured
+service/jenkins-x-external-dns configured
+deployment.extensions/jenkins-x-chartmuseum configured
+persistentvolumeclaim/jenkins-x-chartmuseum unchanged
+secret/jenkins-x-chartmuseum configured
+service/jenkins-x-chartmuseum configured
+role.rbac.authorization.k8s.io/cleanup configured
+rolebinding.rbac.authorization.k8s.io/cleanup configured
+serviceaccount/cleanup configured
+clusterrole.rbac.authorization.k8s.io/controllerbuild-** configured
+clusterrolebinding.rbac.authorization.k8s.io/controllerbuild-** configured
+deployment.apps/jenkins-x-controllerbuild configured
+role.rbac.authorization.k8s.io/controllerbuild configured
+rolebinding.rbac.authorization.k8s.io/controllerbuild configured
+serviceaccount/jenkins-x-controllerbuild configured
+clusterrole.rbac.authorization.k8s.io/controllercommitstatus-** configured
+clusterrolebinding.rbac.authorization.k8s.io/controllercommitstatus-** configured
+deployment.apps/jenkins-x-controllercommitstatus configured
+role.rbac.authorization.k8s.io/controllercommitstatus configured
+rolebinding.rbac.authorization.k8s.io/controllercommitstatus configured
+serviceaccount/jenkins-x-controllercommitstatus configured
+clusterrole.rbac.authorization.k8s.io/controllerrole-** configured
+clusterrolebinding.rbac.authorization.k8s.io/controllerrole-** configured
+deployment.apps/jenkins-x-controllerrole configured
+role.rbac.authorization.k8s.io/controllerrole configured
+rolebinding.rbac.authorization.k8s.io/controllerrole configured
+serviceaccount/jenkins-x-controllerrole configured
+clusterrole.rbac.authorization.k8s.io/controllerteam-** configured
+clusterrolebinding.rbac.authorization.k8s.io/controllerteam-** configured
+deployment.apps/jenkins-x-controllerteam configured
+role.rbac.authorization.k8s.io/controllerteam configured
+rolebinding.rbac.authorization.k8s.io/controllerteam configured
+serviceaccount/jenkins-x-controllerteam configured
+configmap/jenkins-x-docker-registry-config configured
+deployment.extensions/jenkins-x-docker-registry configured
+persistentvolumeclaim/jenkins-x-docker-registry configured
+secret/jenkins-x-docker-registry-secret configured
+service/jenkins-x-docker-registry configured
+role.rbac.authorization.k8s.io/expose configured
+rolebinding.rbac.authorization.k8s.io/expose configured
+serviceaccount/expose configured
+clusterrole.rbac.authorization.k8s.io/gcactivities-** configured
+clusterrolebinding.rbac.authorization.k8s.io/gcactivities-** configured
+cronjob.batch/jenkins-x-gcactivities configured
+role.rbac.authorization.k8s.io/gcactivities configured
+rolebinding.rbac.authorization.k8s.io/gcactivities configured
+serviceaccount/jenkins-x-gcactivities configured
+cronjob.batch/jenkins-x-gcpods configured
+role.rbac.authorization.k8s.io/gcpods configured
+rolebinding.rbac.authorization.k8s.io/gcpods configured
+serviceaccount/jenkins-x-gcpods configured
+clusterrole.rbac.authorization.k8s.io/gcpreviews-** configured
+clusterrolebinding.rbac.authorization.k8s.io/gcpreviews-** configured
+cronjob.batch/jenkins-x-gcpreviews configured
+role.rbac.authorization.k8s.io/gcpreviews configured
+rolebinding.rbac.authorization.k8s.io/gcpreviews configured
+serviceaccount/jenkins-x-gcpreviews configured
+deployment.extensions/jenkins-x-heapster configured
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-x-heapster configured
+role.rbac.authorization.k8s.io/jenkins-x-heapster-pod-nanny configured
+rolebinding.rbac.authorization.k8s.io/jenkins-x-heapster-pod-nanny configured
+service/heapster configured
+serviceaccount/jenkins-x-heapster configured
+deployment.extensions/jenkins-x-mongodb configured
+persistentvolumeclaim/jenkins-x-mongodb configured
+secret/jenkins-x-mongodb configured
+service/jenkins-x-mongodb configured
+configmap/jenkins-x-monocular-api-config configured
+deployment.extensions/jenkins-x-monocular-api configured
+service/jenkins-x-monocular-api configured
+deployment.extensions/jenkins-x-monocular-prerender configured
+service/jenkins-x-monocular-prerender configured
+configmap/jenkins-x-monocular-ui-config configured
+deployment.extensions/jenkins-x-monocular-ui configured
+service/jenkins-x-monocular-ui configured
+configmap/jenkins-x-monocular-ui-vhost configured
+configmap/nexus configured
+deployment.extensions/jenkins-x-nexus configured
+persistentvolumeclaim/jenkins-x-nexus configured
+secret/nexus configured
+service/nexus configured
+role.rbac.authorization.k8s.io/committer configured
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-x-team-controller configured
+configmap/jenkins-x-team-controller configured
+secret/core-sa configured
+secret/jenkins-docker-cfg configured
+secret/gcs-jenkinsx-chartmuseum configured
+configmap/jenkins-x-devpod-config configured
+configmap/jenkins-x-docker-registry configured
+configmap/jenkins-x-extensions configured
+secret/gke-sa configured
+configmap/jenkins-x-pod-templates configured
+secret/**-basic-auth configured
+role.rbac.authorization.k8s.io/**-view configured
+secret/kaniko-secret configured
+secret/jenkins-maven-settings configured
+secret/jenkins-npm-token configured
+role.rbac.authorization.k8s.io/owner configured
+secret/jenkins-release-gpg configured
+secret/jenkins-ssh-config configured
+secret/test-jenkins-user configured
+role.rbac.authorization.k8s.io/viewer configured
+deployment.extensions/jenkins-x-athens-proxy configured
+service/jenkins-x-athens-proxy configured
+app.jenkins.io/jenkins-x-**-app-athens configured
+clusterrole.rbac.authorization.k8s.io/prow-build configured
+clusterrolebinding.rbac.authorization.k8s.io/prow-build-** configured
+deployment.extensions/prow-build configured
+serviceaccount/prow-build configured
+clusterrolebinding.rbac.authorization.k8s.io/cluster-*****-binding-** configured
+clusterrole.rbac.authorization.k8s.io/crier configured
+clusterrolebinding.rbac.authorization.k8s.io/crier-** configured
+deployment.extensions/crier configured
+rolebinding.rbac.authorization.k8s.io/crier configured
+role.rbac.authorization.k8s.io/crier configured
+serviceaccount/crier configured
+deployment.extensions/deck configured
+rolebinding.rbac.authorization.k8s.io/deck configured
+role.rbac.authorization.k8s.io/deck configured
+serviceaccount/deck configured
+service/deck configured
+secret/hmac-token configured
+deployment.extensions/hook configured
+rolebinding.rbac.authorization.k8s.io/hook configured
+role.rbac.authorization.k8s.io/hook configured
+serviceaccount/hook configured
+service/hook configured
+deployment.extensions/horologium configured
+rolebinding.rbac.authorization.k8s.io/horologium configured
+role.rbac.authorization.k8s.io/horologium configured
+serviceaccount/horologium configured
+secret/oauth-token configured
+clusterrole.rbac.authorization.k8s.io/pipeline configured
+clusterrolebinding.rbac.authorization.k8s.io/pipeline-** configured
+deployment.extensions/pipeline configured
+serviceaccount/pipeline configured
+deployment.extensions/pipelinerunner configured
+rolebinding.rbac.authorization.k8s.io/pipelinerunner configured
+role.rbac.authorization.k8s.io/pipelinerunner configured
+serviceaccount/pipelinerunner configured
+service/pipelinerunner configured
+deployment.extensions/plank configured
+rolebinding.rbac.authorization.k8s.io/plank configured
+role.rbac.authorization.k8s.io/plank configured
+serviceaccount/plank configured
+customresourcedefinition.apiextensions.k8s.io/prowjobs.prow.k8s.io configured
+deployment.extensions/sinker configured
+rolebinding.rbac.authorization.k8s.io/sinker configured
+role.rbac.authorization.k8s.io/sinker configured
+serviceaccount/sinker configured
+deployment.extensions/tide configured
+rolebinding.rbac.authorization.k8s.io/tide configured
+role.rbac.authorization.k8s.io/tide configured
+serviceaccount/tide configured
+service/tide configured
+clusterrole.rbac.authorization.k8s.io/tekton-pipelines configured
+clusterrolebinding.rbac.authorization.k8s.io/tekton-pipelines-** configured
+secret/knative-docker-user-pass configured
+secret/knative-git-user-pass configured
+serviceaccount/tekton-pipelines configured
+serviceaccount/tekton-bot configured
+customresourcedefinition.apiextensions.k8s.io/clustertasks.tekton.dev configured
+customresourcedefinition.apiextensions.k8s.io/pipelines.tekton.dev configured
+customresourcedefinition.apiextensions.k8s.io/pipelineruns.tekton.dev configured
+customresourcedefinition.apiextensions.k8s.io/pipelineresources.tekton.dev configured
+customresourcedefinition.apiextensions.k8s.io/tasks.tekton.dev configured
+customresourcedefinition.apiextensions.k8s.io/taskruns.tekton.dev configured
+service/tekton-pipelines-controller configured
+service/tekton-pipelines-webhook configured
+clusterrole.rbac.authorization.k8s.io/tekton-bot configured
+clusterrolebinding.rbac.authorization.k8s.io/tekton-bot-** configured
+role.rbac.authorization.k8s.io/tekton-bot configured
+rolebinding.rbac.authorization.k8s.io/tekton-bot configured
+configmap/config-artifact-bucket configured
+configmap/config-entrypoint configured
+configmap/config-logging configured
+deployment.apps/tekton-pipelines-controller configured
+deployment.apps/tekton-pipelines-webhook configured
+certificate.certmanager.k8s.io/infra-jrawlings-co-uk configured
+issuer.certmanager.k8s.io/letsencrypt-prod configured
+environment.jenkins.io/dev configured
+secret/external-dns-secret configured
+cronjob.batch/gcs-copy configured
+secret/**-pipeline-git-github-github configured
+secret/**-pipeline-git-github-ghe configured
+configmap/ingress-config configured
+configmap/**-install-config configured
+secret/**-install-config configured
+limitrange/limits configured
+environment.jenkins.io/production configured
+environment.jenkins.io/staging configured
+
+Applying Helm hook post-upgrade YAML via kubectl in file: /tmp/helm-template-workdir-536957020/jenkins-x/helmHooks/env/charts/jenkins-x-platform/charts/expose/templates/job.yaml
+job.batch/expose created
+
+Waiting for helm post-upgrade hook Job expose to complete before removing it
+Deleting helm hook sources from file: /tmp/helm-template-workdir-536957020/jenkins-x/helmHooks/env/charts/jenkins-x-platform/charts/expose/templates/job.yaml
+job.batch "expose" deleted
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=jenkins-x,jenkins.io/version!=91 from all pvc configmap release sa role rolebinding secret
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=jenkins-x,jenkins.io/version!=91,jenkins.io/namespace=** from clusterrole clusterrolebinding
+Step: build-step-source-mkdir-jenkins-x-environment-tekton-mo-j276b:
+
+{"level":"warn","ts":1554902998.2858765,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554902998.2982728,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /pvc/release/workspace\""}
+Step: build-step-source-copy-jenkins-x-environment-tekton-mo-qfk2x:
+
+{"level":"warn","ts":1554902999.3052568,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554902999.3169582,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"cp -r /workspace/source/. /pvc/release/workspace\""}
