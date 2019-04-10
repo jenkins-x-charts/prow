@@ -1,0 +1,68 @@
+Step: build-step-credential-initializer-xjhck:
+
+{"level":"warn","ts":1554913447.6836197,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554913447.6846483,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-jenkins-x-charts-prow-master-te-glk8h:
+
+{"level":"warn","ts":1554913448.4730134,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554913449.3621333,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/jenkins-x-charts/prow\" @ \"v0.0.478\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:c149510898a33b1a1b1ee24ed81c17fa6fe17829
+time="2019-04-10T16:24:11Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /builder/home/git/credentials
+Step: build-step-build-basic-auth-username:
+
+/builder/home/basic-auth-user.json
+Step: build-step-build-basic-auth-password:
+
+/builder/home/basic-auth-pass.json
+Step: build-step-build-release:
+
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.0.478/" prow/Chart.yaml
+helm package prow
+Successfully packaged chart and saved it to: /workspace/source/prow-0.0.478.tgz
+curl --fail -u *****:************ --data-binary "@prow-0.0.478.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  7058  100    14  100  7044     69  34796 --:--:-- --:--:-- --:--:-- 34871
+{"saved":true}rm -rf prow*.tgz
+Step: build-step-source-mkdir-jenkins-x-charts-prow-master-te-k8m9f:
+
+{"level":"warn","ts":1554913460.0953548,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554913460.1451774,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /pvc/from-build-pack/workspace\""}
+Step: build-step-source-copy-jenkins-x-charts-prow-master-te-m247m:
+
+{"level":"warn","ts":1554913461.2298305,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554913461.2425873,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"cp -r /workspace/source/. /pvc/from-build-pack/workspace\""}
