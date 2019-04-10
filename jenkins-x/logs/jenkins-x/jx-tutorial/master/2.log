@@ -1,0 +1,24 @@
+Step: build-step-credential-initializer-g49x6:
+
+Unable to retrieve container logs for docker://cfaa1ea6c59a24751dd65d50b03b8c227b69e7c7c4f77c199339c9b974ef733b
+Step: build-step-git-source-jenkins-x-**-tutorial-master-te-wqbdb:
+
+Unable to retrieve container logs for docker://f72e5c2d65c5763b0e415c5e88679c769546eae15283e42a7f5819c3d9381634
+Step: build-step-place-tools:
+
+Unable to retrieve container logs for docker://a1e295c26299bc5f1598b1b546b56c770ec2a63f87ce4d371364bd0bbc4ab16c
+Step: build-step-git-merge:
+
+Unable to retrieve container logs for docker://cce529d8a59c9228819ab6bdfbb1f61188b0bcb8a7b33334727d66eae752fd73
+Step: build-step-setup-**-git-credentials:
+
+Unable to retrieve container logs for docker://2a3c6cca00868c31521e55059ab45f5efb9832174a3dbb0659779281ace73413
+Step: build-step-build-dummy-release:
+
+Unable to retrieve container logs for docker://1b9bc8f1a7dad46085730fa0fda13e086ac2f8c65a7d704447de527a25e0a446
+Step: build-step-source-mkdir-jenkins-x-**-tutorial-master-te-2pdxx:
+
+Unable to retrieve container logs for docker://2e9329c77a8c1f339579836d4316ad0a7accf6f7c781170bf556d5562f4a0930
+Step: build-step-source-copy-jenkins-x-**-tutorial-master-te-dgd5j:
+
+Unable to retrieve container logs for docker://864b58086f027b5755b601eb3e09a40c3802f837e088711dfd277f456c8af14d
