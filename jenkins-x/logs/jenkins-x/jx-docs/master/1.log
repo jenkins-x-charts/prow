@@ -1,0 +1,73 @@
+Step: build-step-credential-initializer-5j6ch:
+
+{"level":"warn","ts":1554911874.4892042,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554911874.4897585,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-jenkins-x-**-docs-master-tekton-k7cvx:
+
+{"level":"warn","ts":1554911875.2342167,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554911877.4588935,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/jenkins-x/**-docs\" @ \"v0.0.47\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:6c745002c1419577fe9735488d178932ac856038
+time="2019-04-10T15:57:59Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-step2:
+
+Cloning into 'jenkins-x-website'...
+Step: build-step-step3:
+
+Hugo Static Site Generator v0.49 linux/amd64 BuildDate: 2018-09-24T10:03:17Z
+Step: build-step-step4:
+
+[?25lBuilding sites … [?25h[K
+                   | EN  | ZH   
++------------------+-----+-----+
+  Pages            | 458 |  78  
+  Paginator pages  |   3 |   0  
+  Non-page files   |   0 |   0  
+  Static files     | 242 | 242  
+  Processed images |   0 |   0  
+  Aliases          |  11 |   8  
+  Sitemaps         |   2 |   1  
+  Cleaned          |   0 |   0  
+
+Total in 1118 ms
+Step: build-step-step5:
+
+/workspace/source/jenkins-x-website /workspace/source
+Generated Git credentials file /builder/home/git/credentials
+[master 1d4fd46] updated site
+ 515 files changed, 23891 insertions(+), 10101 deletions(-)
+ create mode 100644 categories/officehours/index.html
+ create mode 100644 categories/officehours/index.xml
+ create mode 100644 commands/**_create_addon_gloo/index.html
+ create mode 100644 commands/**_get_stream/index.html
+ create mode 100644 community/april-4/index.html
+ create mode 100644 community/archives/index.html
+ create mode 100644 community/february-21/index.html
+ create mode 100644 community/index.xml
+ create mode 100644 community/march-21/index.html
+ create mode 100644 community/page/1/index.html
+ create mode 100644 developing/knative/index.html
+ create mode 100644 zh/architecture/source/index.html
+ create mode 100644 zh/getting-started/manage-via-gitops/index.html
+ create mode 100644 zh/sponsors/index.html
+To https://github.com/jenkins-x/jenkins-x-website.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/jenkins-x/jenkins-x-website.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/source
+Step: build-step-source-mkdir-jenkins-x-**-docs-master-tekton-4**8r:
+
+{"level":"warn","ts":1554911997.493879,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554911997.7149413,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /pvc/release/workspace\""}
+Step: build-step-source-copy-jenkins-x-**-docs-master-tekton-b4nh6:
+
+{"level":"warn","ts":1554911999.0871632,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554912000.5943515,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"cp -r /workspace/source/. /pvc/release/workspace\""}
