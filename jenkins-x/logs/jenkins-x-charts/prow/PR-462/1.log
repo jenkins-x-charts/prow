@@ -1,0 +1,57 @@
+Step: build-step-credential-initializer-qzwf5:
+
+{"level":"warn","ts":1554906237.5837204,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554906237.5842967,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-jenkins-x-charts-prow-pr-462-te-j47cj:
+
+{"level":"warn","ts":1554906238.3161771,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554906239.7808836,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/jenkins-x-charts/prow\" @ \"7df64cf2dcd09d3f95b82fd9bcce2f60d8a6f2d5\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:cb02c0e6dfe02254933aa6648ee2fa37f2a72d1c,462:7df64cf2dcd09d3f95b82fd9bcce2f60d8a6f2d5
+ran git fetch --unshallow origin 7df64cf2dcd09d3f95b82fd9bcce2f60d8a6f2d5: cb02c0e6dfe02254933aa6648ee2fa37f2a72d1c: in 
+ran git checkout master in 
+ran git reset --hard cb02c0e6dfe02254933aa6648ee2fa37f2a72d1c in 
+ran clean --force -d . in 
+ran git merge 7df64cf2dcd09d3f95b82fd9bcce2f60d8a6f2d5 in 
+Step: build-step-build-build:
+
+cat: /builder/home/basic-auth-user.json: No such file or directory
+cat: /builder/home/basic-auth-pass.json: No such file or directory
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
+Step: build-step-source-mkdir-jenkins-x-charts-prow-pr-462-te-kfprt:
+
+{"level":"warn","ts":1554906249.6302235,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554906249.6465049,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /pvc/from-build-pack/workspace\""}
+Step: build-step-source-copy-jenkins-x-charts-prow-pr-462-te-2nrwr:
+
+{"level":"warn","ts":1554906250.726264,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1554906250.738228,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"cp -r /workspace/source/. /pvc/from-build-pack/workspace\""}
