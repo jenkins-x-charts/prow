@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: gcr.io/jenkins-x-infra/prow 
-  tag: v20190410-7d0bf795c
+  repository: gcr.io/jenkinsxio/prow 
+  tag: v20190411-7d0bf795c
 
 deck:
   replicaCount: 2
