@@ -200,6 +200,7 @@ plank:
      memory: 128Mi
 
 build:
+  enabled: true
   image:
     repository: "{{ .Values.image.repository }}/build"
     tag: "{{ .Values.image.tag }}"
