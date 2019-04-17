@@ -11,6 +11,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/pipelinerunner.logs: '[{"source":"prow","service":"pipelinerunner"}]'
       labels:
         app: {{ template "pipelinerunner.name" . }}
     spec:
