@@ -13,6 +13,8 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/deck.logs: '[{"source":"prow","service":"deck"}]'
       labels:
         app: {{ template "deck.name" . }}
     spec:

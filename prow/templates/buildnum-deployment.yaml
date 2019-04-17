@@ -11,6 +11,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/buildnum.logs: '[{"source":"prow","service":"buildnum"}]'
       labels:
         app: {{ template "buildnum.name" . }}
     spec:

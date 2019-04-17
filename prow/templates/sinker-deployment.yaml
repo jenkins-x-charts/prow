@@ -13,6 +13,8 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+      annotations:
+        ad.datadoghq.com/sinker.logs: '[{"source":"prow","service":"sinker"}]'
       labels:
         app: {{ template "sinker.name" . }}
     spec:
