@@ -1,4 +1,6 @@
+{{ if .Values.build.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "build.name" . }}
+{{ end }}

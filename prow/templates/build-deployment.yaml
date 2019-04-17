@@ -1,3 +1,4 @@
+{{ if .Values.build.enabled }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -50,3 +51,4 @@ spec:
           defaultMode: 420
           name: config
         name: config
+{{ end }}
