@@ -11,8 +11,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+{{- if .Values.pipelinerunner.datadog.enabled }}
       annotations:
         ad.datadoghq.com/pipelinerunner.logs: '[{"source":"prow","service":"pipelinerunner"}]'
+{{- end }}
       labels:
         app: {{ template "pipelinerunner.name" . }}
     spec:

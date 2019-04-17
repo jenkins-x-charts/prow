@@ -11,8 +11,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+{{- if .Values.buildnum.datadog.enabled }}
       annotations:
         ad.datadoghq.com/buildnum.logs: '[{"source":"prow","service":"buildnum"}]'
+{{- end }}
       labels:
         app: {{ template "buildnum.name" . }}
     spec:

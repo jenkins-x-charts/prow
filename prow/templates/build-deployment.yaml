@@ -14,8 +14,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.build.datadog.enabled }}
       annotations:
         ad.datadoghq.com/build.logs: '[{"source":"prow","service":"build"}]'
+{{- end }}
       labels:
         app: {{ template "build.name" . }}
     spec:

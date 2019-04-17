@@ -13,8 +13,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.sinker.datadog.enabled }}
       annotations:
         ad.datadoghq.com/sinker.logs: '[{"source":"prow","service":"sinker"}]'
+{{- end }}
       labels:
         app: {{ template "sinker.name" . }}
     spec:

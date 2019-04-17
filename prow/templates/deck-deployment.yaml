@@ -13,8 +13,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.deck.datadog.enabled }}
       annotations:
         ad.datadoghq.com/deck.logs: '[{"source":"prow","service":"deck"}]'
+{{- end }}
       labels:
         app: {{ template "deck.name" . }}
     spec:
