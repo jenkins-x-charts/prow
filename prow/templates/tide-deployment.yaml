@@ -13,8 +13,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.tide.datadog.enabled }}
       annotations:
         ad.datadoghq.com/tide.logs: '[{"source":"prow","service":"tide"}]'
+{{- end }}
       labels:
         app: {{ template "tide.name" . }}
     spec:

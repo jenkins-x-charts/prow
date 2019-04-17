@@ -13,8 +13,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.crier.datadog.enabled }}
       annotations:
         ad.datadoghq.com/crier.logs: '[{"source":"prow","service":"crier"}]'
+{{- end }}
       labels:
         app: {{ template "crier.name" . }}
     spec:

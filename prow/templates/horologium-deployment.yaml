@@ -13,8 +13,10 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
+{{- if .Values.horologium.datadog.enabled }}
       annotations:
         ad.datadoghq.com/horologium.logs: '[{"source":"prow","service":"horologium"}]'
+{{- end }}
       labels:
         app: {{ template "horologium.name" . }}
     spec:
