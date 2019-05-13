@@ -4,7 +4,7 @@
 
 image:
   repository: gcr.io/jenkinsxio/prow 
-  tag: v20190411-88a8176fb
+  tag: v20190510-3f2c8d788
 
 deck:
   replicaCount: 2
