@@ -41,3 +41,4 @@ endif
 	helm package prow
 	curl --fail -u $(CHARTMUSEUM_CREDS_USR):$(CHARTMUSEUM_CREDS_PSW) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
 	rm -rf ${NAME}*.tgz
+	jx step changelog  --verbose --version $(VERSION) --rev $(PULL_BASE_SHA)
