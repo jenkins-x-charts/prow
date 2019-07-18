@@ -3,4 +3,4 @@
 Dependency | Sources | Version | Mismatched versions
 ---------- | ------- | ------- | -------------------
 [jenkins-x/jenkins-x-builders](https://github.com/jenkins-x/jenkins-x-builders) |  | [0.1.578]() | 
-[jenkins-x/jx](https://github.com/jenkins-x/jx) |  | [2.0.483](https://github.com/jenkins-x/jx/releases/tag/v2.0.483) | 
+[jenkins-x/jx](https://github.com/jenkins-x/jx) |  | [2.0.484](https://github.com/jenkins-x/jx/releases/tag/v2.0.484) | 
