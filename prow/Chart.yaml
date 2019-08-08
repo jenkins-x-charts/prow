@@ -3,3 +3,5 @@ description: A Helm chart for Prow
 name: prow
 version: 0.0.1-SNAPSHOT
 icon: https://rawgit.com/jenkins-x/jenkins-x-platform/08df980/images/kubernetes.png
+sources:
+- https://github.com/jenkins-x-charts/prow.git
