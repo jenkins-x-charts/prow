@@ -1,0 +1,53 @@
+Step: build-step-credential-initializer-tb9gm:
+
+{"level":"warn","ts":1565292197.504926,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565292197.5054884,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-working-dir-initializer-dfhp6:
+
+{"level":"warn","ts":1565292198.2284281,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1565292198.2297072,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-source-jenkins-x-charts-prow-pr-998-te-xsgm9:
+
+{"level":"warn","ts":1565292200.3942146,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565292201.9920723,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/jenkins-x-charts/prow @ b94c4f9b77b1edab22705c7e5e64766d73158c97 in path /workspace/source"}
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-08-08T19:23:22Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:070c3701bfeccc365a70c75c16a8f70e32802bdf,998:b94c4f9b77b1edab22705c7e5e64766d73158c97
+ran git fetch --unshallow origin b94c4f9b77b1edab22705c7e5e64766d73158c97: 070c3701bfeccc365a70c75c16a8f70e32802bdf: in 
+ran git checkout master in 
+ran git reset --hard 070c3701bfeccc365a70c75c16a8f70e32802bdf in 
+ran clean --force -d . in 
+ran git merge b94c4f9b77b1edab22705c7e5e64766d73158c97 in 
+Step: build-step-build-build:
+
+cat: /builder/home/basic-auth-user.json: No such file or directory
+cat: /builder/home/basic-auth-pass.json: No such file or directory
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
