@@ -1,0 +1,115 @@
+Step: build-step-credential-initializer-5v7gq:
+
+{"level":"warn","ts":1565282940.7909968,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565282940.7924473,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-working-dir-initializer-rltf5:
+
+{"level":"warn","ts":1565282948.3772094,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1565282948.7172477,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-source-jenkins-x-charts-prow-master-te-8bvq7:
+
+{"level":"warn","ts":1565282955.5916743,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565282958.5830867,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/jenkins-x-charts/prow @ v0.0.997 in path /workspace/source"}
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-08-08T16:49:29Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:550ae06a5aede2d367d32b50c16e525a875554a6
+time="2019-08-08T16:49:29Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /builder/home/git/credentials
+Step: build-step-build-basic-auth-username:
+
+/builder/home/basic-auth-user.json
+Step: build-step-build-basic-auth-password:
+
+/builder/home/basic-auth-pass.json
+Step: build-step-build-release:
+
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.0.997/" prow/Chart.yaml
+helm package prow
+Successfully packaged chart and saved it to: /workspace/source/prow-0.0.997.tgz
+curl --fail -u *****:************ --data-binary "@prow-0.0.997.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  7366  100    14  100  7352     43  22695 --:--:-- --:--:-- --:--:-- 22761
+{"saved":true}rm -rf prow*.tgz
+** step changelog  --verbose --version 0.0.997 --rev 550ae06a5aede2d367d32b50c16e525a875554a6
+Converted /workspace/source to an unshallow repository
+DEBUG: Using helmBinary helm with feature flag: template-mode
+Generating change log from git ref 65f6855395b9383fd4628ec97cf6c1fe55c1a525 => 550ae06a5aede2d367d32b50c16e525a875554a6
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: Found commits:
+DEBUG:   commit 550ae06a5aede2d367d32b50c16e525a875554a6
+DEBUG:   Author: ************* <35031835+*************@users.noreply.github.com>
+DEBUG:   Date: Thu Aug  8 17:48:29 2019
+DEBUG:       
+Merge pull request #995 from *************/bump-regex-version-3a8b73d4-b9fa-11e9-8a30-9e4ee7c094a4
+
+chore(deps): bump https://github.com/jenkins-x/** from 2.0.571 to 2.0.573
+
+
+DEBUG:   commit 96b893c06acd40232a99de9a06cd88dedc069bfe
+DEBUG:   Author: ************* <jenkins-x@googlegroups.com>
+DEBUG:   Date: Thu Aug  8 16:33:18 2019
+DEBUG:       chore(deps): bump https://github.com/jenkins-x/** from 2.0.571 to 2.0.573
+
+Command run was `./build/linux/** step create pr regex --regex \s***Tag:\s*(.*) --version 2.0.573 --files prow/values.yaml --repo https://github.com/jenkins-x-charts/prow.git`
+
+
+
+WARNING: Failed to enrich commit 96b893c06acd40232a99de9a06cd88dedc069bfe with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 96b893c06acd40232a99de9a06cd88dedc069bfe with issues: users.jenkins.io "x-0" already exists
+DEBUG: merging pipeline secrets with local secrets
+Finding issues in commit messages using git format
+DEBUG: Generated release notes:
+
+## Changes
+
+### Chores
+
+* deps: bump https://github.com/jenkins-x/** from 2.0.571 to 2.0.573
+
+### Dependency Updates
+
+| Dependency | Component | New Version | Old Version |
+| ---------- | --------- | ----------- | ----------- |
+| [jenkins-x/**](https://github.com/jenkins-x/**) |  | [2.0.573](https://github.com/jenkins-x/**/releases/tag/v2.0.573) | [2.0.571](https://github.com/jenkins-x/**/releases/tag/v2.0.571)|
+
+WARNING: No release found for jenkins-x-charts/prow and tag v0.0.997 so creating a new release
+Updated the release information at https://github.com/jenkins-x-charts/prow/releases/tag/v0.0.997
+Uploaded /workspace/source/dependency-matrix/matrix.yaml to release asset https://github.com/jenkins-x-charts/prow/releases/download/v0.0.997/dependency-matrix.yaml
+Uploaded dependency-updates.yaml to release asset https://github.com/jenkins-x-charts/prow/releases/download/v0.0.997/dependency-updates.yaml
+generated: /workspace/source/prow/templates/release.yaml
+Created Release prow-0-0-997 resource in namespace **
+Updating PipelineActivity jenkins-x-charts-prow-master-529 with version 0.0.997
+Updated PipelineActivities jenkins-x-charts-prow-master-529 with release notes URL: https://github.com/jenkins-x-charts/prow/releases/tag/v0.0.997
