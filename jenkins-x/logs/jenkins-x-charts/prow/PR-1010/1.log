@@ -1,0 +1,52 @@
+Step: build-step-credential-initializer-wsr8h:
+
+Unable to retrieve container logs for docker://ad977e27d8e67042c1081679ea3472606b5d2a5b2c5a0b7106ff598d34037574
+Step: build-step-working-dir-initializer-mrv6f:
+
+Unable to retrieve container logs for docker://6ec9458cfc3f590a3b5e2772a07a6076f56a04e831a3a24856a9ef00e699143a
+Step: build-step-place-tools:
+
+Unable to retrieve container logs for docker://70a2a617eb27c34da39c4a17f7113649252cd06de19c5d722a2c19aed2c94074
+Step: build-step-git-source-jenkins-x-charts-prow-pr-1010-t-7mb45:
+
+{"level":"warn","ts":1565610030.672361,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565610032.2100024,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/jenkins-x-charts/prow @ b2ff577f95206f3b1bae18c24b405ea064ffc485 in path /workspace/source"}
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-08-12T11:40:32Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:fcc2071109845d09838ec80fda56940edb11bfa4,1010:b2ff577f95206f3b1bae18c24b405ea064ffc485
+ran git fetch --unshallow origin b2ff577f95206f3b1bae18c24b405ea064ffc485: fcc2071109845d09838ec80fda56940edb11bfa4: in 
+ran git checkout master in 
+ran git reset --hard fcc2071109845d09838ec80fda56940edb11bfa4 in 
+ran clean --force -d . in 
+ran git merge b2ff577f95206f3b1bae18c24b405ea064ffc485 in 
+Step: build-step-build-build:
+
+cat: /builder/home/basic-auth-user.json: No such file or directory
+cat: /builder/home/basic-auth-pass.json: No such file or directory
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
