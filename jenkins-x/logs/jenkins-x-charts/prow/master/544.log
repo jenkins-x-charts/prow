@@ -1,0 +1,160 @@
+Step: build-step-credential-initializer-cqzpm:
+
+{"level":"warn","ts":1565610129.2332788,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565610129.2338712,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-working-dir-initializer-fszv8:
+
+{"level":"warn","ts":1565610129.5714822,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1565610129.5731468,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-source-jenkins-x-charts-prow-master-te-6h8r7:
+
+{"level":"warn","ts":1565610131.6729674,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565610133.1766334,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/jenkins-x-charts/prow @ v0.0.1012 in path /workspace/source"}
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-08-12T11:42:13Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:b42d6550bc0a4aa8e4f4a5fd034712369bfbe3d4
+time="2019-08-12T11:42:13Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-setup-**-git-credentials:
+
+Generated Git credentials file /builder/home/git/credentials
+Step: build-step-build-basic-auth-username:
+
+/builder/home/basic-auth-user.json
+Step: build-step-build-basic-auth-password:
+
+/builder/home/basic-auth-pass.json
+Step: build-step-build-release:
+
+rm -rf prow/charts
+rm -rf prow/prow*.tgz
+rm -rf prow/requirements.lock
+helm init --client-only
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io 	
+"jenkins-x" has been added to your repositories
+helm dependency build prow
+No requirements found in prow/charts.
+helm lint prow
+==> Linting prow
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.0.1012/" prow/Chart.yaml
+helm package prow
+Successfully packaged chart and saved it to: /workspace/source/prow-0.0.1012.tgz
+curl --fail -u *****:************ --data-binary "@prow-0.0.1012.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  7368  100    14  100  7354     55  29376 --:--:-- --:--:-- --:--:-- 29416
+{"saved":true}rm -rf prow*.tgz
+** step changelog  --verbose --version 0.0.1012 --rev b42d6550bc0a4aa8e4f4a5fd034712369bfbe3d4
+Converted /workspace/source to an unshallow repository
+DEBUG: Using helmBinary helm with feature flag: template-mode
+Generating change log from git ref 68c0057c6b18fe0bee7f470c6615bdce18c3f7aa => b42d6550bc0a4aa8e4f4a5fd034712369bfbe3d4
+DEBUG: creating system vault for namespace **
+DEBUG: getting vault name for namespace **
+DEBUG: system vault name from config **-vault-tekton-mole
+DEBUG: finding service url for **-vault-tekton-mole in namespace **
+DEBUG: couldn't find service url, attempting to look up via ingress
+DEBUG: found service url https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: connecting to vault on https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: creating system vault for namespace **
+DEBUG: getting vault name for namespace **
+DEBUG: system vault name from config **-vault-tekton-mole
+DEBUG: finding service url for **-vault-tekton-mole in namespace **
+DEBUG: couldn't find service url, attempting to look up via ingress
+DEBUG: found service url https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: connecting to vault on https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: Found commits:
+DEBUG:   commit b42d6550bc0a4aa8e4f4a5fd034712369bfbe3d4
+DEBUG:   Author: ************* <35031835+*************@users.noreply.github.com>
+DEBUG:   Date: Mon Aug 12 12:41:32 2019
+DEBUG:       
+Merge pull request #1010 from *************/bump-chart-version-a87908b1-bcf5-11e9-afed-4ede0f5c93e8
+
+chore(deps): bump https://github.com/jenkins-x/jenkins-x-builders
+
+
+DEBUG:   commit b2ff577f95206f3b1bae18c24b405ea064ffc485
+DEBUG:   Author: ************* <jenkins-x@googlegroups.com>
+DEBUG:   Date: Mon Aug 12 11:38:55 2019
+DEBUG:       chore(deps): bump https://github.com/jenkins-x/jenkins-x-builders from 0.1.645 to 0.1.646
+
+Command run was `** step create pr regex --regex (?m)^\s+repository: gcr.io/jenkinsxio/builder-maven\s+tag: (?P<version>.*) --version 0.1.646 --files prow/values.yaml --files environment-controller/values.yaml --repo https://github.com/jenkins-x-charts/prow.git --repo https://github.com/jenkins-x-charts/environment-controller.git`
+
+
+
+DEBUG:   commit 10c350f30c90283d31e97cdc5b5b71f69dbe5faf
+DEBUG:   Author: ************* <jenkins-x@googlegroups.com>
+DEBUG:   Date: Mon Aug 12 11:38:09 2019
+DEBUG:       chore(deps): bump https://github.com/jenkins-x/jenkins-x-builders to 0.1.646
+
+Command run was `** step create pr chart --name gcr.io/jenkinsxio/builder-maven --version 0.1.646 --repo https://github.com/jenkins-x-charts/environment-controller.git --repo https://github.com/jenkins-x-charts/prow.git`
+
+
+
+WARNING: Failed to enrich commit b2ff577f95206f3b1bae18c24b405ea064ffc485 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit b2ff577f95206f3b1bae18c24b405ea064ffc485 with issues: users.jenkins.io "x-0" already exists
+DEBUG: creating system vault for namespace **
+DEBUG: getting vault name for namespace **
+DEBUG: system vault name from config **-vault-tekton-mole
+DEBUG: finding service url for **-vault-tekton-mole in namespace **
+DEBUG: couldn't find service url, attempting to look up via ingress
+DEBUG: found service url https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: connecting to vault on https://**-vault-tekton-mole.infra.jrawlings.co.uk
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: Dependency update yaml is updates:
+- component: ""
+  fromReleaseHTMLURL: https://github.com/jenkins-x/**/releases/tag/v2.0.581
+  fromReleaseName: 2.0.581
+  fromVersion: 2.0.581
+  host: github.com
+  owner: jenkins-x
+  repo: **
+  toReleaseHTMLURL: https://github.com/jenkins-x/**/releases/tag/v2.0.582
+  toReleaseName: 2.0.582
+  toVersion: 2.0.582
+  url: https://github.com/jenkins-x/**
+Finding issues in commit messages using git format
+WARNING: Failed to enrich commit 10c350f30c90283d31e97cdc5b5b71f69dbe5faf with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 10c350f30c90283d31e97cdc5b5b71f69dbe5faf with issues: users.jenkins.io "x-0" already exists
+DEBUG: Generated release notes:
+
+## Changes
+
+### Chores
+
+* deps: bump https://github.com/jenkins-x/jenkins-x-builders from 0.1.645 to 0.1.646
+* deps: bump https://github.com/jenkins-x/jenkins-x-builders to 0.1.646
+
+### Dependency Updates
+
+| Dependency | Component | New Version | Old Version |
+| ---------- | --------- | ----------- | ----------- |
+| [jenkins-x/jenkins-x-builders](https://github.com/jenkins-x/jenkins-x-builders) |  | [0.1.646](https://github.com/jenkins-x/jenkins-x-builders/releases/tag/v0.1.646) | [0.1.645](https://github.com/jenkins-x/jenkins-x-builders/releases/tag/v0.1.645)|
+| [jenkins-x/**](https://github.com/jenkins-x/**) |  | [0.1.646](https://github.com/jenkins-x/jenkins-x-builders/releases/tag/v0.1.646) | [2.0.581](https://github.com/jenkins-x/**/releases/tag/v2.0.581)|
+
+WARNING: No release found for jenkins-x-charts/prow and tag v0.0.1012 so creating a new release
+Updated the release information at https://github.com/jenkins-x-charts/prow/releases/tag/v0.0.1012
+Uploaded /workspace/source/dependency-matrix/matrix.yaml to release asset https://github.com/jenkins-x-charts/prow/releases/download/v0.0.1012/dependency-matrix.yaml
+Uploaded dependency-updates.yaml to release asset https://github.com/jenkins-x-charts/prow/releases/download/v0.0.1012/dependency-updates.yaml
+generated: /workspace/source/prow/templates/release.yaml
+Created Release prow-0-0-1012 resource in namespace **
+Updating PipelineActivity jenkins-x-charts-prow-master-544 with version 0.0.1012
