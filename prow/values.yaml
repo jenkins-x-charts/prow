@@ -165,6 +165,7 @@ hook:
   terminationGracePeriodSeconds: 180
   args:
     - --dry-run=false
+    - --plugin-help=false 
   resources:
     limits:
      cpu: 400m
