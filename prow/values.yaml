@@ -48,7 +48,7 @@ pipelinerunner:
   enabled: false
   image:
     repository: gcr.io/jenkinsxio/builder-maven
-    tag: 0.1.796
+    tag: 0.1.798
   imagePullPolicy: IfNotPresent
   terminationGracePeriodSeconds: 180
   probe:
