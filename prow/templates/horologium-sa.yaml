@@ -1,4 +1,6 @@
+{{ if .Values.horologium.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "horologium.name" . }}
+{{ end }}

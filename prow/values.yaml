@@ -7,6 +7,7 @@ image:
   tag: v20191001-b0861a4
 
 deck:
+  enabled: true
   replicaCount: 2
   probe:
     liveness:
@@ -183,6 +184,7 @@ hook:
     enabled: "true"
 
 horologium:
+  enabled: true
   replicaCount: 1
   image:
     repository: "{{ .Values.image.repository }}/horologium"
@@ -202,6 +204,7 @@ horologium:
     enabled: "true"
 
 plank:
+  enabled: true
   image:
     repository: "{{ .Values.image.repository }}/plank"
     tag: "{{ .Values.image.tag }}"
@@ -253,6 +256,7 @@ pipeline:
     enabled: "true"
 
 sinker:
+  enabled: true
   replicaCount: 1
   image:
     repository: "{{ .Values.image.repository }}/sinker"

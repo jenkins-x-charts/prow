@@ -1,4 +1,6 @@
+{{ if .Values.sinker.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "sinker.name" . }}
+{{ end }}
