@@ -1,4 +1,6 @@
+{{ if .Values.deck.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "deck.name" . }}
+{{ end }}

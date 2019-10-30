@@ -1,4 +1,6 @@
+{{ if .Values.plank.enabled }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "plank.name" . }}
+{{ end }}
