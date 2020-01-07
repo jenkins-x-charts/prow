@@ -25,5 +25,5 @@ dependencies:
   owner: jenkins-x
   repo: test-infra
   url: https://github.com/jenkins-x/test-infra
-  version: 20191001-b0861a4
+  version: 20200107-aaa0608
   versionURL: ""
