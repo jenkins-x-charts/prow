@@ -4,7 +4,7 @@
 
 image:
   repository: gcr.io/jenkinsxio/prow 
-  tag: v20191001-b0861a4
+  tag: v20200107-aaa0608
 
 deck:
   enabled: true
