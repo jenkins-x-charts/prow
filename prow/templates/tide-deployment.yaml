@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "tide.name" . }}
@@ -6,6 +6,9 @@ metadata:
     app: {{ template "tide.name" . }}
 spec:
   replicas: {{ .Values.tide.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "tide.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
