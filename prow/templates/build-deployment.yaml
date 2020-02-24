@@ -1,5 +1,5 @@
 {{ if .Values.build.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "build.name" . }}
@@ -7,6 +7,9 @@ metadata:
     app: {{ template "build.name" . }}
 spec:
   replicas: {{ .Values.build.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "build.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:

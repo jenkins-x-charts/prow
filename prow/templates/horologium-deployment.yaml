@@ -1,5 +1,5 @@
 {{ if .Values.horologium.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "horologium.name" . }}
@@ -7,6 +7,9 @@ metadata:
     app: {{ template "horologium.name" . }}
 spec:
   replicas: {{ .Values.horologium.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "horologium.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
