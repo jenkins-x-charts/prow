@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "pipeline.name" . }}
@@ -6,9 +6,6 @@ metadata:
     app: {{ template "pipeline.name" . }}
 spec:
   replicas: {{ .Values.pipeline.replicaCount }}
-  selector:
-    matchLabels:
-      app: {{ template "pipeline.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
