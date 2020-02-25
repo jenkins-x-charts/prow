@@ -1,5 +1,5 @@
 {{ if .Values.buildnum.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "buildnum.name" . }}
@@ -7,6 +7,9 @@ metadata:
     app: {{ template "buildnum.name" . }}
 spec:
   replicas: 1 # one canonical source of build numbers
+  selector:
+    matchLabels:
+      app: {{ template "buildnum.name" . }}
   strategy:
     type: RollingUpdate
   template:

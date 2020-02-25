@@ -1,5 +1,5 @@
 {{ if .Values.sinker.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "sinker.name" . }}
@@ -7,6 +7,9 @@ metadata:
     app: {{ template "sinker.name" . }}
 spec:
   replicas: {{ .Values.sinker.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "sinker.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
