@@ -1,5 +1,5 @@
 {{ if .Values.plank.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "plank.name" . }}
@@ -7,6 +7,9 @@ metadata:
     app: {{ template "plank.name" . }}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "plank.name" . }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
