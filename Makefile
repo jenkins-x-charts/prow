@@ -2,9 +2,6 @@ CHART_REPO := http://jenkins-x-chartmuseum:8080
 NAME := prow
 OS := $(shell uname)
 
-CHARTMUSEUM_CREDS_USR := $(shell cat /builder/home/basic-auth-user.json)
-CHARTMUSEUM_CREDS_PSW := $(shell cat /builder/home/basic-auth-pass.json)
-
 init:
 	helm init --client-only
 
@@ -39,6 +36,6 @@ else
 	exit -1
 endif
 	helm package prow
-	curl --fail -u $(CHARTMUSEUM_CREDS_USR):$(CHARTMUSEUM_CREDS_PSW) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
+	curl --fail -u $(CHARTMUSEUM_USER):$(CHARTMUSEUM_PASS) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
 	rm -rf ${NAME}*.tgz
 	jx step changelog  --verbose --version $(VERSION) --rev $(PULL_BASE_SHA)
