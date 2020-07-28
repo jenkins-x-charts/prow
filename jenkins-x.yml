@@ -1,2 +1,45 @@
-buildPack: charts
+buildPack: none
+pipelineConfig:
+  pipelines:
+    release:
+      pipeline:
+        agent:
+          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+        stages:
+          - name: release
+            environment:
+              - name: GIT_COMMITTER_EMAIL
+                value: jenkins-x@googlegroups.com
+              - name: GIT_COMMITTER_NAME
+                value: jenkins-x-bot
+              - name: GIT_AUTHOR_EMAIL
+                value: jenkins-x@googlegroups.com
+              - name: GIT_AUTHOR_NAME
+                value: jenkins-x-bot
+              - name: CHARTMUSEUM_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: jenkins-x-chartmuseum
+                    key: BASIC_AUTH_USER
+              - name: CHARTMUSEUM_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: jenkins-x-chartmuseum
+                    key: BASIC_AUTH_PASS
+            steps:
+              - image: gcr.io/jenkinsxio/builder-jx:0.1.610
+                command: make
+                args:
+                  - release
 
+    pullRequest:
+      pipeline:
+        agent:
+          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+        stages:
+          - name: build-pr
+            steps:
+              - image: gcr.io/jenkinsxio/builder-jx:0.1.610
+                command: make
+                args:
+                  - build
